@@ -45,6 +45,4 @@ data.forEach(function (producto) {
     productosContainer.append(productoDiv);
 });
 
-// ...
-
 }
