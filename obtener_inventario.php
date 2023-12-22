@@ -5,13 +5,16 @@ $username = "enzo";
 $password = "xd";
 $dbname = "proyectozombozo";
 
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-$sql = "SELECT nombre, cantidad_disponible FROM inventario WHERE cantidad_disponible < 50";
+$sql = "SELECT p.id_producto, p.nombre, p.descripcion, p.precio, i.cantidad_disponible
+        FROM producto p
+        INNER JOIN inventario i ON p.id_producto = i.producto_id_producto";
 
 $result = $conn->query($sql);
 

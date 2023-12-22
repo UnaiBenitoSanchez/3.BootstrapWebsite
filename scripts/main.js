@@ -1,31 +1,50 @@
-// scripts/main.js
-
 $(document).ready(function () {
-    // Hacer una solicitud AJAX para obtener datos de inventario
     $.ajax({
-        url: 'obtener_inventario.php', // Ajusta la URL según la configuración de tu servidor
+        url: 'obtener_inventario.php',
         method: 'GET',
         dataType: 'json',
         success: function (data) {
-            // Manejar los datos obtenidos
-            manejarDatosInventario(data);
+            mostrarProductosEnBody(data);
         },
         error: function (error) {
-            console.error('Error al obtener datos de inventario:', error);
+            console.error('Error al obtener datos de productos:', error);
         }
     });
 });
 
-function manejarDatosInventario(data) {
-    // Iterar sobre los datos del inventario y mostrar alertas según sea necesario
-    data.forEach(function (producto) {
-        if (producto.cantidad_disponible < 50) {
-            mostrarAlertaBajoStock(producto.nombre, producto.cantidad_disponible);
-        }
-    });
-}
+function mostrarProductosEnBody(data) {
+    var productosContainer = $('#productos-container');
 
-function mostrarAlertaBajoStock(producto, cantidad) {
-    // Muestra una alerta para productos con bajos niveles de stock
-    alert(`¡Atención! El nivel de stock para ${producto} es bajo (${cantidad} unidades). Considere reabastecer.`);
+    productosContainer.empty();
+
+    var totalProductos = 0;
+
+    data.forEach(function (producto) {
+        totalProductos += parseFloat(producto.cantidad_disponible);
+    });
+
+    // ...
+
+data.forEach(function (producto) {
+    var cantidadDisponible = parseFloat(producto.cantidad_disponible);
+    var porcentaje = totalProductos !== 0 ? (cantidadDisponible / totalProductos) * 100 : 0;
+
+    var productoDiv = $('<div>').addClass('col-md-4 mb-4');
+    productoDiv.append('<div class="card">\
+                            <div class="card-body">\
+                                <h5 class="card-title">' + producto.nombre + '</h5>\
+                                <p class="card-text">' + producto.descripcion + '</p>\
+                                <p class="card-text">Cantidad: ' + cantidadDisponible + '</p>\
+                                <div class="progress">\
+                                    <div class="progress-bar" role="progressbar" style="width: ' + porcentaje + '%;" aria-valuenow="' + porcentaje + '" aria-valuemin="0" aria-valuemax="100">\
+                                        <span class="porcentaje-text">' + porcentaje.toFixed(2) + '%</span>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </div>');
+    productosContainer.append(productoDiv);
+});
+
+// ...
+
 }
