@@ -23,14 +23,12 @@ function mostrarProductosEnBody(data) {
         totalProductos += parseFloat(producto.cantidad_disponible);
     });
 
-    // ...
+    data.forEach(function (producto) {
+        var cantidadDisponible = parseFloat(producto.cantidad_disponible);
+        var porcentaje = totalProductos !== 0 ? (cantidadDisponible / totalProductos) * 100 : 0;
 
-data.forEach(function (producto) {
-    var cantidadDisponible = parseFloat(producto.cantidad_disponible);
-    var porcentaje = totalProductos !== 0 ? (cantidadDisponible / totalProductos) * 100 : 0;
-
-    var productoDiv = $('<div>').addClass('col-md-4 mb-4');
-    productoDiv.append('<div class="card">\
+        var productoDiv = $('<div>').addClass('col-md-4 mb-4');
+        productoDiv.append('<div class="card">\
                             <div class="card-body">\
                                 <h5 class="card-title">' + producto.nombre + '</h5>\
                                 <p class="card-text">' + producto.descripcion + '</p>\
@@ -42,7 +40,7 @@ data.forEach(function (producto) {
                                 </div>\
                             </div>\
                         </div>');
-    productosContainer.append(productoDiv);
-});
+        productosContainer.append(productoDiv);
+    });
 
 }
