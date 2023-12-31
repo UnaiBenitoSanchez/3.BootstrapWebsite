@@ -1,20 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/style.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="scripts/main.js"></script>
-    <title>Inventory management dashboard</title>
+    <title>Inventory Management Dashboard</title>
+    <style>
+        /* Estilos adicionales personalizados */
+        .card {
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-buttons {
+            display: none;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.card', function (event) {
+                event.stopPropagation();
+                $(".card-buttons").hide();
+                $(this).find(".card-buttons").show();
+            });
+
+            $(document).click(function () {
+                $(".card-buttons").hide();
+            });
+        });
+    </script>
 </head>
+
 <body>
-    
+
     <div class="container mt-4">
-        <div class="row" id="productos-container">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h2 class="text-center">Inventory Management Dashboard</h2>
+            </div>
+            <div class="card-body" id="productos-container">
+
+            </div>
         </div>
     </div>
 
+    <script>
+        function mostrarProductosEnBody(data) {
+            var productosContainer = $('#productos-container');
+
+            productosContainer.empty();
+
+            var totalProductos = 0;
+
+            data.forEach(function (producto) {
+                totalProductos += parseFloat(producto.cantidad_disponible);
+            });
+
+            data.forEach(function (producto) {
+                var cantidadDisponible = parseFloat(producto.cantidad_disponible);
+                var porcentaje = totalProductos !== 0 ? (cantidadDisponible / totalProductos) * 100 : 0;
+
+                var productoDiv = $('<div>').addClass('col-lg-4 col-md-6 col-sm-12 mb-3 mx-1 d-inline-block card'); // Ajusta las clases aquí
+                productoDiv.append('<div class="card-body">\
+                    <h5 class="card-title">' + producto.nombre + '</h5>\
+                    <p class="card-text">' + producto.descripcion + '</p>\
+                    <p class="card-text">Cantidad: ' + cantidadDisponible + '</p>\
+                    <div class="progress">\
+                        <div class="progress-bar" role="progressbar" style="width: ' + porcentaje + '%;" aria-valuenow="' + porcentaje + '" aria-valuemin="0" aria-valuemax="100">\
+                            <span class="porcentaje-text">' + porcentaje.toFixed(2) + '%</span>\
+                        </div>\
+                    </div>\
+                    <div class="card-buttons">\
+                        <button class="btn btn-danger mt-2">Eliminar</button>\
+                        <button class="btn btn-warning mt-2">Editar</button>\
+                    </div>\
+                </div>');
+                productosContainer.append(productoDiv);
+            });
+
+        }
+    </script>
+
 </body>
+
 </html>
