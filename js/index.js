@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: 'obtener_inventario.php',
+        url: 'getData.php',
         method: 'GET',
         dataType: 'json',
         success: function (data) {
@@ -20,18 +20,18 @@ function mostrarProductosEnBody(data) {
     var totalProductos = 0;
 
     data.forEach(function (producto) {
-        totalProductos += parseFloat(producto.cantidad_disponible);
+        totalProductos += parseFloat(producto.available_quantity);
     });
 
     data.forEach(function (producto) {
-        var cantidadDisponible = parseFloat(producto.cantidad_disponible);
+        var cantidadDisponible = parseFloat(producto.available_quantity);
         var porcentaje = totalProductos !== 0 ? (cantidadDisponible / totalProductos) * 100 : 0;
 
         var productoDiv = $('<div>').addClass('col-md-4 mb-4');
         productoDiv.append('<div class="card">\
                             <div class="card-body">\
-                                <h5 class="card-title">' + producto.nombre + '</h5>\
-                                <p class="card-text">' + producto.descripcion + '</p>\
+                                <h5 class="card-title">' + producto.name + '</h5>\
+                                <p class="card-text">' + producto.description + '</p>\
                                 <p class="card-text">Cantidad: ' + cantidadDisponible + '</p>\
                                 <div class="progress">\
                                     <div class="progress-bar" role="progressbar" style="width: ' + porcentaje + '%;" aria-valuenow="' + porcentaje + '" aria-valuemin="0" aria-valuemax="100">\
@@ -42,5 +42,4 @@ function mostrarProductosEnBody(data) {
                         </div>');
         productosContainer.append(productoDiv);
     });
-
 }
