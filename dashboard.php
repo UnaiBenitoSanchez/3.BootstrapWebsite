@@ -1,3 +1,8 @@
+<?php
+require_once 'db_connect.php';
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -40,7 +45,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.html">Products from your factory</a>
+                        <a class="nav-link" href="dashboard.php">Products from your factory</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Products categories</a>

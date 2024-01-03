@@ -110,7 +110,10 @@ include 'db_connect.php';
 
                         if ($user) {
                             if ($encryptedPasswordInput == $user['password']) {
+
+                                session_start();
                                 $_SESSION['user_email'] = $email;
+                                
                                 echo '<script>window.location.href = "landing_page.php";</script>';
                                 exit();
                             } else {

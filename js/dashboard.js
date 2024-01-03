@@ -4,8 +4,10 @@ $(document).ready(function () {
         method: 'GET',
         dataType: 'json',
         success: function (data) {
+            console.log(data);
             mostrarProductosEnBody(data);
         },
+        
         error: function (error) {
             console.error('Error:', error);
         }
@@ -32,7 +34,7 @@ function mostrarProductosEnBody(data) {
                             <div class="card-body">\
                                 <h5 class="card-title">' + producto.name + '</h5>\
                                 <p class="card-text">' + producto.description + '</p>\
-                                <p class="card-text">Cantidad: ' + cantidadDisponible + '</p>\
+                                <p class="card-text">Quantity: ' + cantidadDisponible + '</p>\
                                 <div class="progress">\
                                     <div class="progress-bar" role="progressbar" style="width: ' + porcentaje + '%;" aria-valuenow="' + porcentaje + '" aria-valuemin="0" aria-valuemax="100">\
                                         <span class="porcentaje-text">' + porcentaje.toFixed(2) + '%</span>\
