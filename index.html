@@ -1,21 +1,60 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
+
+    <!-- meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- css -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/index.css">
+
+    <!-- js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="js/index.js"></script>
+
+    <!-- title -->
     <title>Inventory management dashboard</title>
+
 </head>
+
 <body>
 
-    <div class="container mt-4">
-        <div class="row" id="productos-container">
-           
+    <div class="container">
+
+        <div class="signup-section" >
+            <header>Signup</header>
+            <form style="margin-top: 90px;">
+                <input type="text" placeholder="Full name" required>
+                <input type="email" placeholder="Email address" required>
+                <input type="password" placeholder="Password" required>
+                <div class="separator">
+                    <div class="line"></div>
+                </div>
+                <button type="submit" class="btn">Signup</button>
+            </form>
         </div>
+
+        <div class="login-section" >
+            <header>Login</header>
+            <form method="post" 
+            
+            style="margin-top: 90px;">
+                <input type="email" placeholder="Email address" required>
+                <input type="password" placeholder="Password" required>
+                <div class="separator">
+                    <div class="line"></div>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
+
     </div>
 
+    <script src="js/index.js"></script>
+
 </body>
+
 </html>
