@@ -34,7 +34,7 @@
                     <a class="nav-link" href="#">Products from your factory<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Products category</a>
+                    <a class="nav-link" href="#">Products categories</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Your factory</a>
