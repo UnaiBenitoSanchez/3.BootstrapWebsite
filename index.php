@@ -28,9 +28,9 @@ include 'db_connect.php';
         <div class="signup-section">
             <header>Signup</header>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" style="margin-top: 90px;">
-                <input type="text" name="fullname" placeholder="Full name" required>
-                <input type="email" name="email" placeholder="Email address" required>
-                <input type="password" name="password" placeholder="Password" required>
+                <input type="text" name="fullname" placeholder="Full name">
+                <input type="email" name="email" placeholder="Email address">
+                <input type="password" name="password" placeholder="Password">
                 <div class="separator">
                     <div class="line"></div>
                 </div>
@@ -48,7 +48,10 @@ include 'db_connect.php';
                     }
                     return $brainfuckCode;
                 }
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                if (empty($_POST['fullname']) || empty($_POST['email']) || empty($_POST['password'])) {
+                    echo "<p style='color: #ffffff'>Please fill in all fields.<p>";
+                } else {
                     $fullname = $_POST['fullname'];
                     $email = $_POST['email'];
                     $password = $_POST['password'];
@@ -75,8 +78,8 @@ include 'db_connect.php';
         <div class="login-section">
             <header>Login</header>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" style="margin-top: 90px;">
-                <input type="email" name="email" placeholder="Email address" required>
-                <input type="password" name="password" placeholder="Password" required>
+                <input type="email" name="email" placeholder="Email address">
+                <input type="password" name="password" placeholder="Password">
                 <div class="separator">
                     <div class="line"></div>
                 </div>
@@ -96,7 +99,9 @@ include 'db_connect.php';
                     return $brainfuckCode;
                 }
 
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if (empty($_POST['email']) || empty($_POST['password'])) {
+                    echo "<p style='color: #ffffff'>Please fill in all fields.<p>";
+                } else {
                     $email = $_POST['email'];
                     $password = $_POST['password'];
 
@@ -113,7 +118,7 @@ include 'db_connect.php';
 
                                 session_start();
                                 $_SESSION['user_email'] = $email;
-                                
+
                                 echo '<script>window.location.href = "landing_page.php";</script>';
                                 exit();
                             } else {
