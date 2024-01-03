@@ -7,7 +7,7 @@ $(document).ready(function () {
             mostrarProductosEnBody(data);
         },
         error: function (error) {
-            console.error('Error al obtener datos de productos:', error);
+            console.error('Error:', error);
         }
     });
 });

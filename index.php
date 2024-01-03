@@ -110,7 +110,8 @@ include 'db_connect.php';
 
                         if ($user) {
                             if ($encryptedPasswordInput == $user['password']) {
-                                echo '<script>window.location.href = "dashboard.html";</script>';
+                                $_SESSION['user_email'] = $email;
+                                echo '<script>window.location.href = "landing_page.php";</script>';
                                 exit();
                             } else {
                                 echo "Incorrect password";
@@ -124,7 +125,6 @@ include 'db_connect.php';
                 }
             }
             ?>
-
         </div>
 
     </div>
