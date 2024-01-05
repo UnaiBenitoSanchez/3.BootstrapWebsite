@@ -7,18 +7,18 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema BootstrapWebsite
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `BootstrapWebsite` ;
+DROP SCHEMA IF EXISTS `BootstrapWebsite`;
 
 -- -----------------------------------------------------
 -- Schema BootstrapWebsite
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `BootstrapWebsite` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `BootstrapWebsite` ;
+CREATE SCHEMA IF NOT EXISTS `BootstrapWebsite` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `BootstrapWebsite`;
 
 -- -----------------------------------------------------
 -- Table `BootstrapWebsite`.`boss`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BootstrapWebsite`.`boss` ;
+DROP TABLE IF EXISTS `BootstrapWebsite`.`boss`;
 
 CREATE TABLE IF NOT EXISTS `BootstrapWebsite`.`boss` (
   `id_boss_factory` INT NOT NULL AUTO_INCREMENT,
@@ -33,21 +33,15 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `BootstrapWebsite`.`factory`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BootstrapWebsite`.`factory` ;
+DROP TABLE IF EXISTS `BootstrapWebsite`.`factory`;
 
 CREATE TABLE IF NOT EXISTS `BootstrapWebsite`.`factory` (
   `id_factory` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `address` VARCHAR(255) NOT NULL,
-  `boss_id_boss_factory` INT NOT NULL,
   `employee_count` INT NOT NULL,
-  PRIMARY KEY (`id_factory`),
-  INDEX `fk_factory_boss1_idx` (`boss_id_boss_factory` ASC) VISIBLE,
-  CONSTRAINT `fk_factory_boss1`
-    FOREIGN KEY (`boss_id_boss_factory`)
-    REFERENCES `BootstrapWebsite`.`boss` (`id_boss_factory`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id_factory`)
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -55,13 +49,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `BootstrapWebsite`.`category`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BootstrapWebsite`.`category` ;
+DROP TABLE IF EXISTS `BootstrapWebsite`.`category`;
 
 CREATE TABLE IF NOT EXISTS `BootstrapWebsite`.`category` (
   `id_category` INT NOT NULL AUTO_INCREMENT,
   `category_name` VARCHAR(255) NOT NULL,
   `category_description` TEXT NOT NULL,
-  PRIMARY KEY (`id_category`))
+  PRIMARY KEY (`id_category`)
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -69,7 +64,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `BootstrapWebsite`.`product`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BootstrapWebsite`.`product` ;
+DROP TABLE IF EXISTS `BootstrapWebsite`.`product`;
 
 CREATE TABLE IF NOT EXISTS `BootstrapWebsite`.`product` (
   `id_product` INT NOT NULL AUTO_INCREMENT,
@@ -83,7 +78,8 @@ CREATE TABLE IF NOT EXISTS `BootstrapWebsite`.`product` (
     FOREIGN KEY (`category_id_category`)
     REFERENCES `BootstrapWebsite`.`category` (`id_category`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -91,7 +87,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `BootstrapWebsite`.`inventory`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BootstrapWebsite`.`inventory` ;
+DROP TABLE IF EXISTS `BootstrapWebsite`.`inventory`;
 
 CREATE TABLE IF NOT EXISTS `BootstrapWebsite`.`inventory` (
   `id_inventory` INT NOT NULL AUTO_INCREMENT,
@@ -111,7 +107,32 @@ CREATE TABLE IF NOT EXISTS `BootstrapWebsite`.`inventory` (
     FOREIGN KEY (`factory_id_factory`)
     REFERENCES `BootstrapWebsite`.`factory` (`id_factory`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+-- -----------------------------------------------------
+-- Table `BootstrapWebsite`.`factory_boss`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `BootstrapWebsite`.`factory_boss`;
+
+CREATE TABLE IF NOT EXISTS `BootstrapWebsite`.`factory_boss` (
+  `factory_id_factory` INT NOT NULL,
+  `boss_id_boss_factory` INT NOT NULL,
+  PRIMARY KEY (`factory_id_factory`, `boss_id_boss_factory`),
+  CONSTRAINT `fk_factory_boss_factory`
+    FOREIGN KEY (`factory_id_factory`)
+    REFERENCES `BootstrapWebsite`.`factory` (`id_factory`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_factory_boss_boss`
+    FOREIGN KEY (`boss_id_boss_factory`)
+    REFERENCES `BootstrapWebsite`.`boss` (`id_boss_factory`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -122,7 +143,8 @@ INSERT INTO category VALUES ('1','Entertainment','Made to let children play with
 
 -- Mattel
 INSERT INTO boss VALUES ('1','Harold Matson','h4r0ld@gmail.com','++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>');
-INSERT INTO factory VALUES ('1','Mattel','California, USA','1','2000');
+INSERT INTO factory VALUES ('1','Mattel','California, USA','2000');
+INSERT INTO factory_boss VALUES ('1','1');
 INSERT INTO product VALUES('1','Barbie Signature Look Gold Disco - Barbie The Movie','Doll','20.00','1');
 INSERT INTO inventory VALUES('1','600','2023-12-22','1','1');
 INSERT INTO product VALUES('2','Barbie The Movie Fashion Pack','Pack','10.00','1');
@@ -132,7 +154,8 @@ INSERT INTO inventory VALUES('3','500','2023-12-22','3','1');
 
 -- Lego
 INSERT INTO boss VALUES ('2','Ole Kirk Christiansen','0l3@gmail.com','++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>');
-INSERT INTO factory VALUES ('2','Lego','Texas, USA','2','6000');
+INSERT INTO factory VALUES ('2','Lego','Texas, USA','6000');
+INSERT INTO factory_boss VALUES ('2','2');
 INSERT INTO product VALUES('4','Bouquet of Roses','Mountable','59.99','1');
 INSERT INTO inventory VALUES('4','200','2024-01-03','4','2');
 INSERT INTO product VALUES('5','Orient Express Train','Mountable','299.99','1');
@@ -142,7 +165,8 @@ INSERT INTO inventory VALUES('6','100','2024-01-03','6','2');
 
 -- Nerf
 INSERT INTO boss VALUES ('3','Reyn Guyer','r3yn@gmail.com','++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>');
-INSERT INTO factory VALUES ('3','Nerf','Ohio, USA','3','4000');
+INSERT INTO factory VALUES ('3','Nerf','Ohio, USA','4000');
+INSERT INTO factory_boss VALUES ('3','3');
 INSERT INTO product VALUES('7','SMG-Zesty de Nerf Fortnite','Nerf gun','20.00','1');
 INSERT INTO inventory VALUES('7','100','2024-01-03','7','3');
 INSERT INTO product VALUES('8','Nerf Ultra Select','Nerf gun','10.00','1');
@@ -152,7 +176,8 @@ INSERT INTO inventory VALUES('9','50','2024-01-03','9','3');
 
 -- Playtime Co.
 INSERT INTO boss VALUES ('4','Elliot Ludwig','3ll1ot@gmail.com','++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>');
-INSERT INTO factory VALUES ('4','Playtime Co.','Los Angeles, USA','4','8000');
+INSERT INTO factory VALUES ('4','Playtime Co.','Los Angeles, USA','8000');
+INSERT INTO factory_boss VALUES ('4','4');
 INSERT INTO product VALUES('10','Boxy Boo','t̸̛̲̖̣̱̠͇̑̑̉̈́̈́̉̍̀̚o̸̢͎̹̩̪̰͇͓̕͝ȳ̵̧̟͚͔͎̻̻̣̲','50.00','1');
 INSERT INTO inventory VALUES('10','1000','2024-01-03','10','4');
 INSERT INTO product VALUES('11','Candy Cat','t̸̛̲̖̣̱̠͇̑̑̉̈́̈́̉̍̀̚o̸̢͎̹̩̪̰͇͓̕͝ȳ̵̧̟͚͔͎̻̻̣̲','30.00','1');
@@ -163,3 +188,4 @@ INSERT INTO inventory VALUES('12','3000','2024-01-03','12','4');
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+

@@ -31,6 +31,17 @@ include 'db_connect.php';
                 <input type="text" name="fullname" placeholder="Full name">
                 <input type="email" name="email" placeholder="Email address">
                 <input type="password" name="password" placeholder="Password">
+
+                <label for="factory" style="color: white;">Select your factory:</label>
+                <select name="factory" id="factory">
+                    <?php
+                    $stmt = $conn->query("SELECT id_factory, name FROM factory");
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<option value='{$row['id_factory']}'>{$row['name']}</option>";
+                    }
+                    ?>
+                </select>
+
                 <div class="separator">
                     <div class="line"></div>
                 </div>
@@ -49,12 +60,13 @@ include 'db_connect.php';
                     return $brainfuckCode;
                 }
 
-                if (empty($_POST['fullname']) || empty($_POST['email']) || empty($_POST['password'])) {
-                    echo "<p style='color: #ffffff'>Please fill in all fields.<p>";
+                if (empty($_POST['fullname']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['factory'])) {
+                    echo "<p style='color: #ffffff'>Please fill in all fields, including the factory.<p>";
                 } else {
                     $fullname = $_POST['fullname'];
                     $email = $_POST['email'];
                     $password = $_POST['password'];
+                    $factoryId = $_POST['factory'];  
 
                     $encryptedPassword = textToBrainfuck($password);
 
@@ -65,7 +77,14 @@ include 'db_connect.php';
                         $stmt->bindParam(':password', $encryptedPassword);
                         $stmt->execute();
 
-                        echo "User registered successfully";
+                        $bossId = $conn->lastInsertId();
+
+                        $stmt = $conn->prepare("INSERT INTO factory_boss (factory_id_factory, boss_id_boss_factory) VALUES (:factoryId, :bossId)");
+                        $stmt->bindParam(':factoryId', $factoryId);
+                        $stmt->bindParam(':bossId', $bossId);
+                        $stmt->execute();
+
+                        echo "<p  style='color: white;'>User registered successfully</p>";
                     } catch (PDOException $e) {
                         echo "Error: " . $e->getMessage();
                     }
