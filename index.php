@@ -18,7 +18,7 @@ include 'db_connect.php';
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <!-- title -->
-    <title>Inventory management dashboard</title>
+    <title>Inventory management dashboard - Login/Register</title>
 </head>
 
 <body>
