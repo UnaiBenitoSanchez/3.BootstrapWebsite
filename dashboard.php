@@ -1,3 +1,8 @@
+<?php
+require_once 'db_connect.php';
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,8 +70,6 @@
     </footer>
 
     <?php
-    require_once 'db_connect.php';
-    session_start();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["addProd"])) {
         $productName = $_POST["product_name"];
