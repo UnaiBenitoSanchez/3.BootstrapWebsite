@@ -130,7 +130,6 @@ include 'db_connect.php';
                                             "&editedEmployeeCount=" + editedEmployeeCount);
                                     }
 
-
                                     function updateMap(updatedAddress) {
                                         fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(updatedAddress))
                                             .then(response => response.json())
