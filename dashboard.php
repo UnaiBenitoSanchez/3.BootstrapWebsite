@@ -71,6 +71,14 @@ session_start();
                     <label for="product_quantity" class="form-label">Initial Quantity</label>
                     <input type="number" class="form-control" id="product_quantity" name="product_quantity">
                 </div>
+                <div class="mb-3">
+                    <label for="product_quantity_add" class="form-label">Quantity to Add</label>
+                    <input type="number" class="form-control" id="product_quantity_add" name="product_quantity_add">
+                </div>
+                <div class="mb-3">
+                    <label for="product_quantity_delete" class="form-label">Quantity to Delete</label>
+                    <input type="number" class="form-control" id="product_quantity_delete" name="product_quantity_delete">
+                </div>
                 <button type="submit" class="btn btn-primary" name="addProd">Add Product</button>
             </form>
         </div>
@@ -80,13 +88,13 @@ session_start();
 
     <?php
 
-
-
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["addProd"])) {
         $productName = $_POST["product_name"];
         $productDescription = $_POST["product_description"];
         $productPrice = $_POST["product_price"];
-        $productQuantity = $_POST["product_quantity"];
+        $initialQuantity = $_POST["product_quantity"];
+        $quantityToAdd = $_POST["product_quantity_add"];
+        $quantityToDelete = $_POST["product_quantity_delete"];
 
         $bossEmail = $_SESSION['user_email'];
 
@@ -102,7 +110,42 @@ session_start();
             $factoryId = $stmt->fetchColumn();
 
             $stmt = $conn->prepare("INSERT INTO inventory (available_quantity, update_date, product_id_product, factory_id_factory) VALUES (?, CURRENT_DATE, ?, ?)");
-            $stmt->execute([$productQuantity, $productId, $factoryId]);
+            $stmt->execute([$initialQuantity, $productId, $factoryId]);
+
+            $stmt = $conn->prepare("INSERT INTO inventory_history (product_id_product, change_quantity, change_type) VALUES (?, ?, 'Add')");
+            $stmt->execute([$productId, $initialQuantity]);
+
+            if (!empty($quantityToDelete)) {
+                $subtractEventSQL = "CREATE EVENT IF NOT EXISTS subtract_quantity_event_$productName
+                ON SCHEDULE EVERY 2 MINUTE
+                DO
+                BEGIN
+                    UPDATE BootstrapWebsite.inventory
+                    SET available_quantity = GREATEST(available_quantity - $quantityToDelete, 0)
+                    WHERE product_id_product = $productId;
+        
+                    INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+                    VALUES ($productId, $quantityToDelete, 'Subtract');
+                END;";
+                $stmt = $conn->prepare($subtractEventSQL);
+                $stmt->execute();
+            }
+
+            if (!empty($quantityToAdd)) {
+                $addEventSQL = "CREATE EVENT IF NOT EXISTS add_quantity_event_$productName
+                ON SCHEDULE EVERY 3 MINUTE
+                DO
+                BEGIN
+                    UPDATE BootstrapWebsite.inventory
+                    SET available_quantity = available_quantity + $quantityToAdd
+                    WHERE product_id_product = $productId;
+        
+                    INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+                    VALUES ($productId, $quantityToAdd, 'Add');
+                END;";
+                $stmt = $conn->prepare($addEventSQL);
+                $stmt->execute();
+            }
 
             header("Location: {$_SERVER['PHP_SELF']}");
             exit();
