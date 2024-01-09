@@ -294,30 +294,30 @@ END;
 //
 DELIMITER ;
 
--- Event to delete 200 every 2 minutes from Bunzo Bunny
+-- Event to delete 300 every 2 minutes from Bunzo Bunny
 DELIMITER //
-CREATE EVENT IF NOT EXISTS subtract_quantity_event_boxyboo
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_BunzoBunny
 ON SCHEDULE EVERY 2 MINUTE
 DO
 BEGIN
   -- Get current quantity before the update
-  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo'));
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bunzo Bunny'));
 
   -- Perform the update to subtract 100
   UPDATE BootstrapWebsite.inventory
   SET available_quantity = GREATEST(available_quantity - 200, 0)
-  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo');
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bunzo Bunny');
 
   -- Insert the change into the history table
   INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
-  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo')), 'Subtract');
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bunzo Bunny'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bunzo Bunny')), 'Subtract');
 END;
 //
 DELIMITER ;
 
--- Event to add 400 every 3 minutes from Bunzo Bunny
+-- Event to add 200 every 3 minutes from Bunzo Bunny
 DELIMITER //
-CREATE EVENT IF NOT EXISTS add_quantity_event_boxyboo
+CREATE EVENT IF NOT EXISTS add_quantity_event_BunzoBunny
 ON SCHEDULE EVERY 3 MINUTE
 DO
 BEGIN
