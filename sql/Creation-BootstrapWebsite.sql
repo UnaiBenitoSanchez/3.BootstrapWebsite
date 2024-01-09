@@ -141,7 +141,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
--- Inserts
+-- Inserts-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO category VALUES ('1','Entertainment','Made to let children play with it');
 
@@ -188,6 +188,36 @@ INSERT INTO product VALUES('11','Candy Cat','t̸̛̲̖̣̱̠͇̑̑̉̈́̈́̉̍̀̚
 INSERT INTO inventory VALUES('11','2000','2024-01-03','11','4');
 INSERT INTO product VALUES('12','Bunzo Bunny','t̸̛̲̖̣̱̠͇̑̑̉̈́̈́̉̍̀̚o̸̢͎̹̩̪̰͇͓̕͝ȳ̵̧̟͚͔͎̻̻̣̲','20.00','img/playtime3.jpg','1');
 INSERT INTO inventory VALUES('12','3000','2024-01-03','12','4');
+
+-- Scripts-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SET GLOBAL event_scheduler = ON;
+
+-- Create an event to delete 100 every 2 minutes
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event
+ON SCHEDULE EVERY 2 MINUTE
+DO
+BEGIN
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat');
+END;
+//
+DELIMITER ;
+
+-- Create an event to add 200 every 3 minutes
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event
+ON SCHEDULE EVERY 3 MINUTE
+DO
+BEGIN
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 200
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat');
+END;
+//
+DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
