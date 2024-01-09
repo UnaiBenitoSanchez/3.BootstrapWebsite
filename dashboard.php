@@ -1,5 +1,5 @@
 <?php
-require_once 'db_connect.php';
+include 'db_connect.php';
 session_start();
 ?>
 
@@ -30,6 +30,13 @@ session_start();
         #addProductFooter.expanded {
             max-height: 500px;
         }
+
+        .floating-button {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            z-index: 100;
+        }
     </style>
 
 </head>
@@ -38,7 +45,7 @@ session_start();
 
     <?php include './controller/navbar.php'; ?>
 
-    <div class="container mt-4">
+    <div class="container mt-4 col-lg-10">
         <div class="row" id="productos-container">
 
         </div>
@@ -69,7 +76,11 @@ session_start();
         </div>
     </footer>
 
+    <a href="graphics.php" class="btn btn-success floating-button">See production graphics</a>
+
     <?php
+
+
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["addProd"])) {
         $productName = $_POST["product_name"];
