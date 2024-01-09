@@ -14,19 +14,46 @@
     $user_email = $_SESSION['user_email'];
 
     $factoryIdStmt = $conn->prepare("SELECT fb.factory_id_factory
-                                   FROM factory_boss fb
-                                   INNER JOIN boss b ON fb.boss_id_boss_factory = b.id_boss_factory
-                                   WHERE b.email = :user_email");
+                               FROM factory_boss fb
+                               INNER JOIN boss b ON fb.boss_id_boss_factory = b.id_boss_factory
+                               WHERE b.email = :user_email");
     $factoryIdStmt->bindParam(':user_email', $user_email, PDO::PARAM_STR);
     $factoryIdStmt->execute();
     $factoryId = $factoryIdStmt->fetch(PDO::FETCH_ASSOC)['factory_id_factory'];
 
     $productsStmt = $conn->prepare("SELECT p.id_product, p.name
-                                  FROM product p
-                                  INNER JOIN inventory i ON p.id_product = i.product_id_product
-                                  WHERE i.factory_id_factory = :factory_id");
+                              FROM product p
+                              INNER JOIN inventory i ON p.id_product = i.product_id_product
+                              WHERE i.factory_id_factory = :factory_id");
     $productsStmt->bindParam(':factory_id', $factoryId, PDO::PARAM_INT);
     $productsStmt->execute();
+
+    $productsData = array();
+
+    while ($product = $productsStmt->fetch(PDO::FETCH_ASSOC)) {
+        $productId = $product['id_product'];
+        $productName = $product['name'];
+
+        $historyStmt = $conn->prepare("SELECT ih.change_timestamp, ih.change_quantity 
+                            FROM inventory_history ih 
+                            INNER JOIN inventory i ON ih.product_id_product = i.product_id_product
+                            WHERE i.product_id_product = :product_id");
+        $historyStmt->bindParam(':product_id', $productId, PDO::PARAM_INT);
+        $historyStmt->execute();
+
+        $chartData = array();
+        $chartData[] = array('Timestamp', 'Quantity');
+
+        while ($row = $historyStmt->fetch(PDO::FETCH_ASSOC)) {
+            $timestamp = date("Y-m-d H:i:s", strtotime($row['change_timestamp']));
+            $chartData[] = array($timestamp, (int)$row['change_quantity']);
+        }
+
+        $productsData[$productId] = array(
+            'name' => $productName,
+            'chartData' => $chartData
+        );
+    }
     ?>
 
     <script type="text/javascript">
@@ -38,24 +65,9 @@
 
         function drawCharts() {
             <?php
-            while ($product = $productsStmt->fetch(PDO::FETCH_ASSOC)) {
-                $productId = $product['id_product'];
-                $productName = $product['name'];
-
-                $historyStmt = $conn->prepare("SELECT ih.change_timestamp, ih.change_quantity 
-                                        FROM inventory_history ih 
-                                        INNER JOIN inventory i ON ih.product_id_product = i.product_id_product
-                                        WHERE i.product_id_product = :product_id");
-                $historyStmt->bindParam(':product_id', $productId, PDO::PARAM_INT);
-                $historyStmt->execute();
-
-                $chartData = array();
-                $chartData[] = array('Timestamp', 'Quantity');
-
-                while ($row = $historyStmt->fetch(PDO::FETCH_ASSOC)) {
-                    $timestamp = date("Y-m-d H:i:s", strtotime($row['change_timestamp']));
-                    $chartData[] = array($timestamp, (int)$row['change_quantity']);
-                }
+            foreach ($productsData as $productId => $productInfo) {
+                $productName = $productInfo['name'];
+                $chartData = $productInfo['chartData'];
             ?>
 
                 var options_<?php echo $productId; ?> = {
@@ -75,6 +87,7 @@
             ?>
         }
     </script>
+
 
     <style>
         .floating-button {

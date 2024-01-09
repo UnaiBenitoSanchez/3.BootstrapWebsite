@@ -28,7 +28,7 @@ session_start();
         }
 
         #addProductFooter.expanded {
-            max-height: 500px;
+            max-height: 1100px;
         }
 
         .floating-button {
