@@ -118,6 +118,29 @@ DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 -- -----------------------------------------------------
+-- Table `BootstrapWebsite`.`inventory_history`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `BootstrapWebsite`.`inventory_history`;
+
+CREATE TABLE IF NOT EXISTS `BootstrapWebsite`.`inventory_history` (
+  `id_history` INT NOT NULL AUTO_INCREMENT,
+  `product_id_product` INT NOT NULL,
+  `change_quantity` INT NOT NULL,
+  `change_type` VARCHAR(50) NOT NULL,
+  `change_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_history`),
+  INDEX `fk_inventory_history_product1_idx` (`product_id_product` ASC) VISIBLE,
+  CONSTRAINT `fk_inventory_history_product1`
+    FOREIGN KEY (`product_id_product`)
+    REFERENCES `BootstrapWebsite`.`product` (`id_product`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+-- -----------------------------------------------------
 -- Table `BootstrapWebsite`.`factory_boss`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `BootstrapWebsite`.`factory_boss`;
@@ -191,29 +214,10 @@ INSERT INTO inventory VALUES('12','3000','2024-01-03','12','4');
 
 -- Scripts-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- Create table to store inventory history
-CREATE TABLE IF NOT EXISTS `BootstrapWebsite`.`inventory_history` (
-  `id_history` INT NOT NULL AUTO_INCREMENT,
-  `product_id_product` INT NOT NULL,
-  `change_quantity` INT NOT NULL,
-  `change_type` VARCHAR(50) NOT NULL,
-  `change_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_history`),
-  INDEX `fk_inventory_history_product1_idx` (`product_id_product` ASC) VISIBLE,
-  CONSTRAINT `fk_inventory_history_product1`
-    FOREIGN KEY (`product_id_product`)
-    REFERENCES `BootstrapWebsite`.`product` (`id_product`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
 -- Event to delete 100 every 2 minutes from Candy Cat
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event
-ON SCHEDULE EVERY 2 MINUTE
+ON SCHEDULE EVERY 30 SECOND
 DO
 BEGIN
   -- Get current quantity before the update
@@ -234,7 +238,7 @@ DELIMITER ;
 -- Event to add 200 every 3 minutes from Candy Cat
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event
-ON SCHEDULE EVERY 3 MINUTE
+ON SCHEDULE EVERY 20 SECOND
 DO
 BEGIN
   -- Get current quantity before the update
@@ -255,7 +259,7 @@ DELIMITER ;
 -- Event to delete 100 every 2 minutes from Boxy Boo
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_boxyboo
-ON SCHEDULE EVERY 2 MINUTE
+ON SCHEDULE EVERY 30 SECOND
 DO
 BEGIN
   -- Get current quantity before the update
@@ -276,7 +280,7 @@ DELIMITER ;
 -- Event to add 200 every 3 minutes from Boxy Boo
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_boxyboo
-ON SCHEDULE EVERY 3 MINUTE
+ON SCHEDULE EVERY 20 SECOND
 DO
 BEGIN
   -- Get current quantity before the update
@@ -297,7 +301,7 @@ DELIMITER ;
 -- Event to delete 300 every 2 minutes from Bunzo Bunny
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_BunzoBunny
-ON SCHEDULE EVERY 2 MINUTE
+ON SCHEDULE EVERY 30 SECOND
 DO
 BEGIN
   -- Get current quantity before the update
@@ -318,7 +322,7 @@ DELIMITER ;
 -- Event to add 200 every 3 minutes from Bunzo Bunny
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_BunzoBunny
-ON SCHEDULE EVERY 3 MINUTE
+ON SCHEDULE EVERY 20 SECOND
 DO
 BEGIN
   -- Get current quantity before the update

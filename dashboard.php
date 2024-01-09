@@ -116,33 +116,47 @@ session_start();
             $stmt->execute([$productId, $initialQuantity]);
 
             if (!empty($quantityToDelete)) {
-                $subtractEventSQL = "CREATE EVENT IF NOT EXISTS subtract_quantity_event_$productName
-                ON SCHEDULE EVERY 2 MINUTE
+                $subtractEventSQL = "DELIMITER //
+                CREATE EVENT IF NOT EXISTS subtract_quantity_event_$productName
+                ON SCHEDULE EVERY 5 SECOND
                 DO
                 BEGIN
-                    UPDATE BootstrapWebsite.inventory
-                    SET available_quantity = GREATEST(available_quantity - $quantityToDelete, 0)
-                    WHERE product_id_product = $productId;
-        
-                    INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
-                    VALUES ($productId, $quantityToDelete, 'Subtract');
-                END;";
+
+                  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName'));
+                
+                  UPDATE BootstrapWebsite.inventory
+                  SET available_quantity = GREATEST(available_quantity - $quantityToDelete, 0)
+                  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName');
+                
+                  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+                  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName')), 'Subtract');
+                END;
+                //
+                DELIMITER ;
+                ";
                 $stmt = $conn->prepare($subtractEventSQL);
                 $stmt->execute();
             }
 
             if (!empty($quantityToAdd)) {
-                $addEventSQL = "CREATE EVENT IF NOT EXISTS add_quantity_event_$productName
-                ON SCHEDULE EVERY 3 MINUTE
+                $addEventSQL = "DELIMITER //
+                CREATE EVENT IF NOT EXISTS add_quantity_event_$productName
+                ON SCHEDULE EVERY 10 SECOND
                 DO
                 BEGIN
-                    UPDATE BootstrapWebsite.inventory
-                    SET available_quantity = available_quantity + $quantityToAdd
-                    WHERE product_id_product = $productId;
-        
-                    INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
-                    VALUES ($productId, $quantityToAdd, 'Add');
-                END;";
+           
+                  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName'));
+                
+                  UPDATE BootstrapWebsite.inventory
+                  SET available_quantity = available_quantity + $quantityToAdd
+                  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName');
+                
+                  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+                  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName')), 'Add');
+                
+                  END;
+                //
+                DELIMITER ;";
                 $stmt = $conn->prepare($addEventSQL);
                 $stmt->execute();
             }
