@@ -224,12 +224,9 @@ BEGIN
   SET available_quantity = GREATEST(available_quantity - 100, 0)
   WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat');
 
-  -- Calculate the change in quantity
-  SET @change_quantity := @current_quantity - (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat'));
-
   -- Insert the change into the history table
   INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
-  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat'), @change_quantity, 'Subtract');
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat')), 'Subtract');
 END;
 //
 DELIMITER ;
@@ -248,12 +245,9 @@ BEGIN
   SET available_quantity = available_quantity + 200
   WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat');
 
-  -- Calculate the change in quantity
-  SET @change_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat')) - @current_quantity;
-
   -- Insert the change into the history table
   INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
-  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat'), @change_quantity, 'Add');
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat')), 'Add');
 END;
 //
 DELIMITER ;
