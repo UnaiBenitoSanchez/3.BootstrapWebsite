@@ -1,4 +1,5 @@
 -- Selects
+USE `BootstrapWebsite`;
 
 -- Select from boss
 select * from boss;
@@ -14,6 +15,9 @@ select * from product;
 
 -- Select from inventory
 select * from inventory;
+
+-- Select from inventory
+select * from inventory_history;
 
 -- Select from factory_boss
 select * from factory_boss;

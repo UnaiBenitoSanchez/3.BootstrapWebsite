@@ -191,30 +191,69 @@ INSERT INTO inventory VALUES('12','3000','2024-01-03','12','4');
 
 -- Scripts-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-SET GLOBAL event_scheduler = ON;
+-- Create table to store inventory history
+CREATE TABLE IF NOT EXISTS `BootstrapWebsite`.`inventory_history` (
+  `id_history` INT NOT NULL AUTO_INCREMENT,
+  `product_id_product` INT NOT NULL,
+  `change_quantity` INT NOT NULL,
+  `change_type` VARCHAR(50) NOT NULL,
+  `change_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_history`),
+  INDEX `fk_inventory_history_product1_idx` (`product_id_product` ASC) VISIBLE,
+  CONSTRAINT `fk_inventory_history_product1`
+    FOREIGN KEY (`product_id_product`)
+    REFERENCES `BootstrapWebsite`.`product` (`id_product`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
--- Create an event to delete 100 every 2 minutes
+-- Event to delete 100 every 2 minutes
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event
 ON SCHEDULE EVERY 2 MINUTE
 DO
 BEGIN
+  -- Get current quantity before the update
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat'));
+
+  -- Perform the update to subtract 100
   UPDATE BootstrapWebsite.inventory
   SET available_quantity = GREATEST(available_quantity - 100, 0)
   WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat');
+
+  -- Calculate the change in quantity
+  SET @change_quantity := @current_quantity - (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat'));
+
+  -- Insert the change into the history table
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat'), @change_quantity, 'Subtract');
 END;
 //
 DELIMITER ;
 
--- Create an event to add 200 every 3 minutes
+-- Event to add 200 every 3 minutes
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event
 ON SCHEDULE EVERY 3 MINUTE
 DO
 BEGIN
+  -- Get current quantity before the update
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat'));
+
+  -- Perform the update to add 200
   UPDATE BootstrapWebsite.inventory
   SET available_quantity = available_quantity + 200
   WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat');
+
+  -- Calculate the change in quantity
+  SET @change_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat')) - @current_quantity;
+
+  -- Insert the change into the history table
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat'), @change_quantity, 'Add');
 END;
 //
 DELIMITER ;
