@@ -210,7 +210,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
--- Event to delete 100 every 2 minutes
+-- Event to delete 100 every 2 minutes from Candy Cat
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event
 ON SCHEDULE EVERY 2 MINUTE
@@ -231,7 +231,7 @@ END;
 //
 DELIMITER ;
 
--- Event to add 200 every 3 minutes
+-- Event to add 200 every 3 minutes from Candy Cat
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event
 ON SCHEDULE EVERY 3 MINUTE
@@ -248,6 +248,90 @@ BEGIN
   -- Insert the change into the history table
   INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
   VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Candy Cat')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete 100 every 2 minutes from Boxy Boo
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_boxyboo
+ON SCHEDULE EVERY 2 MINUTE
+DO
+BEGIN
+  -- Get current quantity before the update
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo'));
+
+  -- Perform the update to subtract 100
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo');
+
+  -- Insert the change into the history table
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add 200 every 3 minutes from Boxy Boo
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_boxyboo
+ON SCHEDULE EVERY 3 MINUTE
+DO
+BEGIN
+  -- Get current quantity before the update
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo'));
+
+  -- Perform the update to add 200
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 200
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo');
+
+  -- Insert the change into the history table
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete 200 every 2 minutes from Bunzo Bunny
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_boxyboo
+ON SCHEDULE EVERY 2 MINUTE
+DO
+BEGIN
+  -- Get current quantity before the update
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo'));
+
+  -- Perform the update to subtract 100
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 200, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo');
+
+  -- Insert the change into the history table
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Boxy Boo')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add 400 every 3 minutes from Bunzo Bunny
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_boxyboo
+ON SCHEDULE EVERY 3 MINUTE
+DO
+BEGIN
+  -- Get current quantity before the update
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bunzo Bunny'));
+
+  -- Perform the update to add 200
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 400
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bunzo Bunny');
+
+  -- Insert the change into the history table
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bunzo Bunny'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bunzo Bunny')), 'Add');
 END;
 //
 DELIMITER ;
