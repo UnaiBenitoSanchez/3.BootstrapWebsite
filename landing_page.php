@@ -14,7 +14,6 @@
   <!-- title -->
   <title>Inventory management dashboard</title>
 
-
 </head>
 
 <body>

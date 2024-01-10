@@ -43,7 +43,7 @@ include 'db_connect.php';
             if ($stmt->rowCount() > 0) {
     ?>
                 <div class="container mt-5">
-                    <h2>Factory Information</h2>
+                    <h2 style="color: white">Factory Information</h2>
                     <?php
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         $factoryAddress = $row['factory_address'];
