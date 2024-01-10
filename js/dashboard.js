@@ -40,13 +40,13 @@ $(document).ready(function () {
     
         var productDiv = $('<div>').addClass('col-md-4 mb-6');
         productDiv.html('<div class="card">\
-                <div class="card-body" style="background: rgba(0, 0, 0, 0.5);  border-radius: 8px; border: 2px solid #3498db;">\
-                    <h5 class="card-title" style="color: white">' + product.name + '</h5>\
-                    <img src="' + product.image + '" style="max-width: 200px; max-height: 200px; background-color: white" class="card-img-top" alt="Product Image" onerror="handleImageError(this)">\
-                    <p style="color: white" class="card-text">Product description: ' + product.description + '</p>\
-                    <p style="color: white" class="card-text">Quantity: ' + availableQuantity + '</p>\
-                    <p style="color: white" class="card-text">Price: $<span class="price-editable" data-product-id="' + product.id_product + '">' + price.toFixed(2) + '</span></p>\
-                    <p style="color: white">Percentage from the total:</p>\
+                <div class="card-body">\
+                    <h5 class="card-title">' + product.name + '</h5>\
+                    <img src="' + product.image + '" style="max-width: 200px; max-height: 200px;" class="card-img-top" alt="Product Image" onerror="handleImageError(this)">\
+                    <p class="card-text">Product description: ' + product.description + '</p>\
+                    <p class="card-text">Quantity: ' + availableQuantity + '</p>\
+                    <p class="card-text">Price: $<span class="price-editable" data-product-id="' + product.id_product + '">' + price.toFixed(2) + '</span></p>\
+                    <p>Percentage from the total:</p>\
                     <div class="progress">\
                         <div class="progress-bar" role="progressbar" style="width: ' + percentage + '%;" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100">\
                             <span class="percentage-text">' + percentage.toFixed(2) + '%</span>\
