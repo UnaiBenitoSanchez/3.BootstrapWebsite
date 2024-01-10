@@ -116,9 +116,9 @@ session_start();
             $stmt->execute([$productId, $initialQuantity]);
 
             if (!empty($quantityToDelete)) {
-                $subtractEventSQL = "DELIMITER //
+                $subtractEventSQL = "
                 CREATE EVENT IF NOT EXISTS subtract_quantity_event_$productName
-                ON SCHEDULE EVERY 5 SECOND
+                ON SCHEDULE EVERY 30 SECOND
                 DO
                 BEGIN
 
@@ -131,17 +131,15 @@ session_start();
                   INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
                   VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName')), 'Subtract');
                 END;
-                //
-                DELIMITER ;
                 ";
                 $stmt = $conn->prepare($subtractEventSQL);
                 $stmt->execute();
             }
 
             if (!empty($quantityToAdd)) {
-                $addEventSQL = "DELIMITER //
+                $addEventSQL = "
                 CREATE EVENT IF NOT EXISTS add_quantity_event_$productName
-                ON SCHEDULE EVERY 10 SECOND
+                ON SCHEDULE EVERY 20 SECOND
                 DO
                 BEGIN
            
@@ -155,14 +153,11 @@ session_start();
                   VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName')), 'Add');
                 
                   END;
-                //
-                DELIMITER ;";
+                ";
                 $stmt = $conn->prepare($addEventSQL);
                 $stmt->execute();
             }
-
-            header("Location: {$_SERVER['PHP_SELF']}");
-            exit();
+           
         } catch (PDOException $e) {
             echo "Error inserting data: " . $e->getMessage();
         }
