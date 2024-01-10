@@ -45,8 +45,8 @@ session_start();
 
     <?php include './controller/navbar.php'; ?>
 
-    <div class="container mt-4 col-lg-10">
-        <div class="row" id="productos-container">
+    <div class="container mt-4 mb-5 col-lg-10">
+        <div class="row" id="products-container">
 
         </div>
     </div>
@@ -66,6 +66,10 @@ session_start();
                 <div class="mb-3">
                     <label for="product_price" class="form-label">Product Price</label>
                     <input type="number" step="0.01" class="form-control" id="product_price" name="product_price">
+                </div>
+                <div class="mb-3">
+                    <label for="product_image" class="form-label">Product Image</label>
+                    <input type="file" class="form-control" id="product_image" name="product_image">
                 </div>
                 <div class="mb-3">
                     <label for="product_quantity" class="form-label">Initial Quantity</label>
@@ -157,7 +161,6 @@ session_start();
                 $stmt = $conn->prepare($addEventSQL);
                 $stmt->execute();
             }
-           
         } catch (PDOException $e) {
             echo "Error inserting data: " . $e->getMessage();
         }
