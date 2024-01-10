@@ -72,11 +72,11 @@ session_start();
                     <input type="number" class="form-control" id="product_quantity" name="product_quantity">
                 </div>
                 <div class="mb-3">
-                    <label for="product_quantity_add" class="form-label">Quantity to Add</label>
+                    <label for="product_quantity_add" class="form-label">Quantity created every hour</label>
                     <input type="number" class="form-control" id="product_quantity_add" name="product_quantity_add">
                 </div>
                 <div class="mb-3">
-                    <label for="product_quantity_delete" class="form-label">Quantity to Delete</label>
+                    <label for="product_quantity_delete" class="form-label">Quantity sold every hour</label>
                     <input type="number" class="form-control" id="product_quantity_delete" name="product_quantity_delete">
                 </div>
                 <button type="submit" class="btn btn-primary" name="addProd">Add Product</button>

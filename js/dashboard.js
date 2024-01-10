@@ -17,97 +17,97 @@ $(document).ready(function () {
     }
 
     function renderProducts(data) {
-        var productosContainer = $('#productos-container');
-        productosContainer.empty();
+        var productsContainer = $('#products-container');
+        productsContainer.empty();
 
-        var totalProductos = 0;
+        var totalProducts = 0;
 
-        data.forEach(function (producto) {
-            totalProductos += parseFloat(producto.available_quantity);
+        data.forEach(function (product) {
+            totalProducts += parseFloat(product.available_quantity);
         });
 
-        data.forEach(function (producto) {
-            console.log("Imagen:", producto.image);
-            var productoDiv = createProductCard(producto, totalProductos);
-            productosContainer.append(productoDiv);
+        data.forEach(function (product) {
+            console.log("Image:", product.image);
+            var productDiv = createProductCard(product, totalProducts);
+            productsContainer.append(productDiv);
         });
     }
 
-    function createProductCard(producto, totalProductos) {
-        var cantidadDisponible = parseFloat(producto.available_quantity);
-        var precio = parseFloat(producto.price);
-        var porcentaje = totalProductos !== 0 ? (cantidadDisponible / totalProductos) * 100 : 0;
+    function createProductCard(product, totalProducts) {
+        var availableQuantity = parseFloat(product.available_quantity);
+        var price = parseFloat(product.price);
+        var percentage = totalProducts !== 0 ? (availableQuantity / totalProducts) * 100 : 0;
     
-        var productoDiv = $('<div>').addClass('col-md-4 mb-6');
-        productoDiv.html('<div class="card">\
+        var productDiv = $('<div>').addClass('col-md-4 mb-6');
+        productDiv.html('<div class="card">\
                 <div class="card-body">\
-                    <h5 class="card-title">' + producto.name + '</h5>\
-                    <img src="' + producto.image + '" style="max-width: 200px; max-height: 200px" class="card-img-top" alt="Product Image" onerror="handleImageError(this)">\
-                    <p class="card-text">Product description: ' + producto.description + '</p>\
-                    <p class="card-text">Quantity: ' + cantidadDisponible + '</p>\
-                    <p class="card-text">Price: $<span class="precio-editable" data-producto-id="' + producto.id_product + '">' + precio.toFixed(2) + '</span></p>\
+                    <h5 class="card-title">' + product.name + '</h5>\
+                    <img src="' + product.image + '" style="max-width: 200px; max-height: 200px" class="card-img-top" alt="Product Image" onerror="handleImageError(this)">\
+                    <p class="card-text">Product description: ' + product.description + '</p>\
+                    <p class="card-text">Quantity: ' + availableQuantity + '</p>\
+                    <p class="card-text">Price: $<span class="price-editable" data-product-id="' + product.id_product + '">' + price.toFixed(2) + '</span></p>\
                     <p>Percentage from the total:</p>\
                     <div class="progress">\
-                        <div class="progress-bar" role="progressbar" style="width: ' + porcentaje + '%;" aria-valuenow="' + porcentaje + '" aria-valuemin="0" aria-valuemax="100">\
-                            <span class="porcentaje-text">' + porcentaje.toFixed(2) + '%</span>\
+                        <div class="progress-bar" role="progressbar" style="width: ' + percentage + '%;" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100">\
+                            <span class="percentage-text">' + percentage.toFixed(2) + '%</span>\
                         </div>\
                     </div>\
-                    <button style="margin-top: 10px" class="btn btn-primary btn-editar" data-producto-id="' + producto.id_product + '">Editar</button>\
-                    <button style="margin-top: 10px" class="btn btn-danger btn-eliminar" data-producto-id="' + producto.id_product + '">Eliminar</button>\
+                    <button style="margin-top: 10px" class="btn btn-primary btn-edit" data-product-id="' + product.id_product + '">Edit</button>\
+                    <button style="margin-top: 10px" class="btn btn-danger btn-delete" data-product-id="' + product.id_product + '">Delete</button>\
                 </div>\
             </div>');
     
-        return productoDiv;
+        return productDiv;
     }    
 
-    $(document).on('click', '.btn-editar', function () {
+    $(document).on('click', '.btn-edit', function () {
         handleEditButtonClick($(this));
     });
 
-    $(document).on('click', '.btn-confirmar', function () {
+    $(document).on('click', '.btn-confirm', function () {
         handleConfirmButtonClick($(this));
     });
 
-    $(document).on('click', '.btn-eliminar', function () {
+    $(document).on('click', '.btn-delete', function () {
         handleDeleteButtonClick($(this));
     });
 
     function handleEditButtonClick(button) {
-        var productoDiv = button.closest('.card-body');
-        var nombre = productoDiv.find('.card-title').text();
-        var descripcion = productoDiv.find('.card-text:eq(0)').text();
-        var cantidad = productoDiv.find('.card-text:eq(1)').text().trim().split(':')[1];
-        var precio = productoDiv.find('.precio-editable').text();
+        var productDiv = button.closest('.card-body');
+        var name = productDiv.find('.card-title').text();
+        var description = productDiv.find('.card-text:eq(0)').text();
+        var quantity = productDiv.find('.card-text:eq(1)').text().trim().split(':')[1];
+        var price = productDiv.find('.price-editable').text();
     
-        var descripcionParte = descripcion.replace(/^Product description:\s*/, '');
+        var descriptionPart = description.replace(/^Product description:\s*/, '');
     
-        var cantidadParte = cantidad.replace(/^Quantity:\s*/, '');
+        var quantityPart = quantity.replace(/^Quantity:\s*/, '');
     
-        productoDiv.find('.card-title').html('<input type="text" class="form-control" value="' + nombre + '">');
-        productoDiv.find('.card-text:eq(0)').html('<p>Product description:</p><textarea class="form-control">' + descripcionParte + '</textarea>');
-        productoDiv.find('.card-text:eq(1)').html('<p>Quantity:</p><input type="text" class="form-control" value="' + cantidadParte + '">');
-        productoDiv.find('.precio-editable').html('<input type="text" class="form-control" value="' + precio + '">');
+        productDiv.find('.card-title').html('<input type="text" class="form-control" value="' + name + '">');
+        productDiv.find('.card-text:eq(0)').html('<p>Product description:</p><textarea class="form-control">' + descriptionPart + '</textarea>');
+        productDiv.find('.card-text:eq(1)').html('<p>Quantity:</p><input type="text" class="form-control" value="' + quantityPart + '">');
+        productDiv.find('.price-editable').html('<input type="text" class="form-control" value="' + price + '">');
     
-        button.removeClass('btn-editar').addClass('btn-confirmar').text('Confirmar');
+        button.removeClass('btn-edit').addClass('btn-confirm').text('Confirm');
     }    
     
     function handleConfirmButtonClick(button) {
-        var productoDiv = button.closest('.card-body');
-        var idProducto = button.data('producto-id');
-        var nuevoNombre = productoDiv.find('.card-title input').val();
-        var nuevaDescripcion = productoDiv.find('.card-text textarea').val();
-        var nuevaCantidad = productoDiv.find('.card-text:eq(1) input').val();
-        var nuevoPrecio = productoDiv.find('.precio-editable input').val();
+        var productDiv = button.closest('.card-body');
+        var productId = button.data('product-id');
+        var newName = productDiv.find('.card-title input').val();
+        var newDescription = productDiv.find('.card-text textarea').val();
+        var newQuantity = productDiv.find('.card-text:eq(1) input').val();
+        var newPrice = productDiv.find('.price-editable input').val();
 
         $.ajax({
             url: 'updateData.php',
             method: 'POST',
             data: {
-                id_producto: idProducto,
-                nuevo_nombre: nuevoNombre,
-                nueva_descripcion: nuevaDescripcion,
-                nueva_cantidad: nuevaCantidad,
-                nuevo_precio: nuevoPrecio
+                id_product: productId,
+                new_name: newName,
+                new_description: newDescription,
+                new_quantity: newQuantity,
+                new_price: newPrice
             },
             success: function (response) {
                 console.log(response);
@@ -120,13 +120,13 @@ $(document).ready(function () {
     }
 
     function handleDeleteButtonClick(button) {
-        var idProducto = button.data('producto-id');
+        var productId = button.data('product-id');
 
         $.ajax({
             url: 'deleteData.php',
             method: 'POST',
             data: {
-                id_producto: idProducto
+                id_product: productId
             },
             success: function (response) {
                 console.log(response);
