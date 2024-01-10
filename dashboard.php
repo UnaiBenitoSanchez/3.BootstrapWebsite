@@ -118,7 +118,7 @@ session_start();
             if (!empty($quantityToDelete)) {
                 $subtractEventSQL = "
                 CREATE EVENT IF NOT EXISTS subtract_quantity_event_$productName
-                ON SCHEDULE EVERY 30 SECOND
+                ON SCHEDULE EVERY 1 HOUR
                 DO
                 BEGIN
 
@@ -139,7 +139,7 @@ session_start();
             if (!empty($quantityToAdd)) {
                 $addEventSQL = "
                 CREATE EVENT IF NOT EXISTS add_quantity_event_$productName
-                ON SCHEDULE EVERY 20 SECOND
+                ON SCHEDULE EVERY 1 HOUR
                 DO
                 BEGIN
            
