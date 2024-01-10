@@ -11,6 +11,11 @@ include 'db_connect.php';
     <title>Inventory management dashboard - Factory</title>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+    body {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/factory.jpg');
+    }
+  </style>
 </head>
 
 <body>

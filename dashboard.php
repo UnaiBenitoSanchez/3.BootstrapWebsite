@@ -38,6 +38,11 @@ session_start();
             z-index: 100;
         }
     </style>
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/factory.jpg');
+        }
+    </style>
 
 </head>
 
@@ -106,7 +111,7 @@ session_start();
             $nombreArchivo = basename($_FILES["product_image"]["name"]);
         }
 
-        $nombreArchivo1 = "img/".$nombreArchivo;
+        $nombreArchivo1 = "img/" . $nombreArchivo;
 
         try {
             $stmt = $conn->prepare("INSERT INTO product (name, description, price, image, category_id_category) VALUES (?, ?, ?, ?, 1)");
