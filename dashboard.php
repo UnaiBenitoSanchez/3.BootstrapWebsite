@@ -17,7 +17,7 @@ session_start();
     <script src="js/dashboard.js"></script>
 
     <!-- title -->
-    <title>Inventory management dashboard - Products</title>
+    <title>Inventory Management Dashboard - Products</title>
 
     <!-- style -->
     <style>
@@ -54,7 +54,7 @@ session_start();
     <footer class="bg-body-tertiary text-center text-lg-start fixed-bottom" id="addProductFooter">
         <div class="container mt-4">
             <h5>Add New Product</h5>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="product_name" class="form-label">Product Name</label>
                     <input type="text" class="form-control" id="product_name" name="product_name">
@@ -88,7 +88,7 @@ session_start();
         </div>
     </footer>
 
-    <a href="graphics.php" class="btn btn-success floating-button">See production graphics</a>
+    <a href="graphics.php" class="btn btn-success floating-button">See Production Graphics</a>
 
     <?php
 
@@ -102,9 +102,15 @@ session_start();
 
         $bossEmail = $_SESSION['user_email'];
 
+        if (isset($_FILES["product_image"]) && $_FILES["product_image"]["error"] == 0) {
+            $nombreArchivo = basename($_FILES["product_image"]["name"]);
+        }
+
+        $nombreArchivo1 = "img/".$nombreArchivo;
+
         try {
-            $stmt = $conn->prepare("INSERT INTO product (name, description, price, category_id_category) VALUES (?, ?, ?, 1)");
-            $stmt->execute([$productName, $productDescription, $productPrice]);
+            $stmt = $conn->prepare("INSERT INTO product (name, description, price, image, category_id_category) VALUES (?, ?, ?, ?, 1)");
+            $stmt->execute([$productName, $productDescription, $productPrice, $nombreArchivo1]);
 
             $productId = $conn->lastInsertId();
 
