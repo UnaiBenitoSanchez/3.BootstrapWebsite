@@ -3,6 +3,12 @@
 
 <head>
 
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/factory.jpg');
+        }
+    </style>
+
     <?php include './controller/head.php'; ?>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
