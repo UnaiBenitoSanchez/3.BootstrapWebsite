@@ -1,4 +1,9 @@
 <style>
+    .navbar{
+        background-color: #2596be;
+        opacity: 0.9;
+    }
+
     .navbar-nav .nav-link {
         color: #ffffff;
         transition: color 0.3s;
@@ -9,7 +14,7 @@
     }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="landing_page.php" style="color: #ffffff">Bootstrap Website</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
