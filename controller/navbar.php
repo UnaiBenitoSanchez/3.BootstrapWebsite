@@ -2,6 +2,7 @@
     .navbar{
         background-color: #2596be;
         opacity: 0.9;
+        z-index: 100;
     }
 
     .navbar-nav .nav-link {
