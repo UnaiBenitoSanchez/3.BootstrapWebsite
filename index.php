@@ -10,6 +10,7 @@ include 'db_connect.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/index.css">
 
@@ -45,7 +46,7 @@ include 'db_connect.php';
                 <div class="separator">
                     <div class="line"></div>
                 </div>
-                <button type="submit" class="btn" name="signup">Signup</button>
+                <button type="submit" class="btn" name="signup" style="background-color: white;">Signup</button>
             </form>
 
             <?php
