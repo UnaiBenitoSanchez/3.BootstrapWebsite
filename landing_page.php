@@ -14,7 +14,8 @@
     .container {
       width: 90%;
       max-width: 900px;
-      margin: 20px auto; /* Añadido un margen y centrado horizontalmente */
+      margin: 20px auto;
+      /* Añadido un margen y centrado horizontalmente */
       background: transparent;
       border: 2px solid rgba(255, 255, 255, 0.5);
       border-radius: 20px;
@@ -49,7 +50,7 @@
         ['Company', 'Sales', 'Production', 'Profit'],
         ['Hasbro', 38983746, 43240000, 4000000],
         ['Bandai', 50983746, 62240000, 8000000],
-        ['Mattel', 63983746, 75240000, 10000000],
+        ['Playtime Co.', 63983746, 75240000, 10000000],
         ['MGA Entertainment', 43983746, 56240000, 6000000]
       ]);
 
@@ -102,7 +103,30 @@
 
   <div class="container">
     Our most sold toys:
-    
+    <br>
+    <div style="justify-content: center; display: flex; flex-wrap: wrap;">
+      <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Boxy Boo</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+      <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Bron</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+      <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Bubba Bubbaphant</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
   </div>
 
 </body>
