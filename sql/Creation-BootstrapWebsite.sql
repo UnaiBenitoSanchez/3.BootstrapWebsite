@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `BootstrapWebsite`.`product` (
   `name` VARCHAR(255) NOT NULL,
   `description` TEXT NOT NULL,
   `price` DECIMAL(10,2) NOT NULL,
-  `image` VARCHAR(255),
+  `image` VARCHAR(255) NOT NULL,
   `category_id_category` INT NOT NULL,
   PRIMARY KEY (`id_product`),
   INDEX `fk_product_category_idx` (`category_id_category` ASC) VISIBLE,

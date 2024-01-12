@@ -79,10 +79,10 @@ $factoryName = getFactoryNameByBoss($bossEmail);
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ['Company', 'Sales', 'Production', 'Profit'],
-        ['Hasbro', 38983746, 43240000, 4000000],
-        ['Bandai', 50983746, 62240000, 8000000],
-        ['Playtime Co.', 63983746, 75240000, 10000000],
-        ['MGA Entertainment', 43983746, 56240000, 6000000]
+        ['Mattel', 63983746, 75240000, 10000000],
+        ['Melissa & Doug', 28983746, 33240000, 2000000],
+        ['VTech', 50983746, 62240000, 8000000],
+        ['Spin Master', 53983746, 66240000, 6000000]
       ]);
 
       var options = {
@@ -131,10 +131,10 @@ $factoryName = getFactoryNameByBoss($bossEmail);
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ['Company', 'Sales', 'Production', 'Profit'],
-        ['Hasbro', 38983746, 43240000, 4000000],
-        ['Bandai', 50983746, 62240000, 8000000],
-        ['Playtime Co.', 63983746, 75240000, 10000000],
-        ['MGA Entertainment', 43983746, 56240000, 6000000]
+        ['Ravensburger', 38983746, 43240000, 4000000],
+        ['Lego', 63983746, 75240000, 10000000],
+        ['Fisher-Price', 50983746, 62240000, 8000000],
+        ['Playmobil', 43983746, 56240000, 6000000]
       ]);
 
       var options = {
@@ -183,10 +183,10 @@ $factoryName = getFactoryNameByBoss($bossEmail);
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ['Company', 'Sales', 'Production', 'Profit'],
-        ['Hasbro', 38983746, 43240000, 4000000],
-        ['Bandai', 50983746, 62240000, 8000000],
-        ['Playtime Co.', 63983746, 75240000, 10000000],
-        ['MGA Entertainment', 43983746, 56240000, 6000000]
+        ['LeapFrog', 38983746, 43240000, 5000000],
+        ['Tomy', 40983746, 52240000, 7000000],
+        ['Nerf', 63983746, 75240000, 10000000],
+        ['WowWee', 23983746, 36240000, 3000000]
       ]);
 
       var options = {
@@ -235,10 +235,10 @@ $factoryName = getFactoryNameByBoss($bossEmail);
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ['Company', 'Sales', 'Production', 'Profit'],
-        ['Hasbro', 38983746, 43240000, 4000000],
+        ['Naipes Heraclio Fournier', 38983746, 43240000, 4000000],
         ['Bandai', 50983746, 62240000, 8000000],
-        ['Playtime Co.', 63983746, 75240000, 10000000],
-        ['MGA Entertainment', 43983746, 56240000, 6000000]
+        ['MGA Entertainment', 23983746, 36240000, 4000000],
+        ['Playtime Co.', 63983746, 75240000, 10000000]
       ]);
 
       var options = {
@@ -282,24 +282,112 @@ $factoryName = getFactoryNameByBoss($bossEmail);
     google.charts.setOnLoadCallback(drawChart);
   </script>
 
+  <!-- Mattel -->
   <?php if ($factoryName == 'Mattel') : ?>
     <div class="container">
       <div id="columnchart_material1" style="width: 100%; height: 500px;"></div>
     </div>
+
+    <div class="container">
+      Our most sold toys:
+      <br>
+      <div style="justify-content: center; display: flex; flex-wrap: wrap;">
+        <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Barbie Cutie Reveal Serie Phantasy Unicorn</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Barbie Cutie Reveal Serie Jungle Friends Tiger</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Disney Frozen Queen Anna Y Elsa Snow Queen</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   <?php endif; ?>
 
+  <!-- Lego -->
   <?php if ($factoryName == 'Lego') : ?>
     <div class="container">
       <div id="columnchart_material2" style="width: 100%; height: 500px;"></div>
     </div>
+
+    <div class="container">
+      Our most sold toys:
+      <br>
+      <div style="justify-content: center; display: flex; flex-wrap: wrap;">
+        <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Cherry Blossoms</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Disney Ariel Mini Castle</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Natural History Museum</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   <?php endif; ?>
 
+  <!-- Nerf -->
   <?php if ($factoryName == 'Nerf') : ?>
     <div class="container">
       <div id="columnchart_material3" style="width: 100%; height: 500px;"></div>
     </div>
+
+    <div class="container">
+      Our most sold toys:
+      <br>
+      <div style="justify-content: center; display: flex; flex-wrap: wrap;">
+        <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Nerf DinoSquad Rex-Rampage</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Nerf Alpha Strike Slinger SD-1 - Set de puntería</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Nerf Alpha Strike - Set de misión</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   <?php endif; ?>
 
+  <!-- Playtime Co. -->
   <?php if ($factoryName == 'Playtime Co.') : ?>
     <div class="container">
       <div id="columnchart_material4" style="width: 100%; height: 500px;"></div>
