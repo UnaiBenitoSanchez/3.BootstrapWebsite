@@ -46,9 +46,8 @@ session_start();
 
 <body>
 
-  <!-- Tu código de barra de navegación PHP -->
   <?php include './controller/navbar.php'; ?>
-  <!-- Cargar Google Charts Loader -->
+
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     function drawChart() {
@@ -101,43 +100,66 @@ session_start();
     google.charts.setOnLoadCallback(drawChart);
   </script>
 
-  <div class="container">
-    <div id="columnchart_material" style="width: 100%; height: 500px;"></div>
-  </div>
-
-  <div class="container">
-        Our most sold toys:
-        <br>
-        <div style="justify-content: center; display: flex; flex-wrap: wrap;">
-          <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Boxy Boo</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Bron</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Bubba Bubbaphant</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
   <?php
 
   $boss = $_SESSION['user_email'];
 
+  // Function to check if the boss is associated with "Playtime Co."
+  function checkIfPlaytimeBoss($boss)
+  {
+    // Implement your logic to check if $boss is associated with "Playtime Co."
+
+    $stmtm->
+    // Return true if associated, false otherwise
+    return true; // Replace with your actual logic
+  }
+
+  // Check if the logged-in boss is associated with "Playtime Co."
+  $isPlaytimeBoss = checkIfPlaytimeBoss($boss);
+
+  if ($isPlaytimeBoss) {
+    echo '<div class="container">';
+  }
+
   ?>
+
+  <div id="columnchart_material" style="width: 100%; height: 500px;"></div>
+
+  <?php
+
+  if ($isPlaytimeBoss) {
+    echo '</div>';
+  }
+
+  ?>
+
+  <div class="container">
+    Our most sold toys:
+    <br>
+    <div style="justify-content: center; display: flex; flex-wrap: wrap;">
+      <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Boxy Boo</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+        </div>
+      </div>
+      <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Bron</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+        </div>
+      </div>
+      <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Bubba Bubbaphant</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 
