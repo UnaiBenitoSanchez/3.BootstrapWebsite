@@ -1,3 +1,8 @@
+<?php
+include 'db_connect.php';
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +20,6 @@
       width: 90%;
       max-width: 900px;
       margin: 20px auto;
-      /* Añadido un margen y centrado horizontalmente */
       background: transparent;
       border: 2px solid rgba(255, 255, 255, 0.5);
       border-radius: 20px;
@@ -32,19 +36,21 @@
     }
   </style>
 
+  <!-- Tu código de encabezado PHP -->
   <?php include './controller/head.php'; ?>
 
   <!-- title -->
   <title>Inventory management dashboard</title>
 
-  <!-- for the chart -->
+</head>
+
+<body>
+
+  <!-- Tu código de barra de navegación PHP -->
+  <?php include './controller/navbar.php'; ?>
+  <!-- Cargar Google Charts Loader -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-    google.charts.load('current', {
-      'packages': ['bar']
-    });
-    google.charts.setOnLoadCallback(drawChart);
-
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ['Company', 'Sales', 'Production', 'Profit'],
@@ -86,48 +92,52 @@
       };
 
       var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
       chart.draw(data, google.charts.Bar.convertOptions(options));
     }
+
+    google.charts.load('current', {
+      'packages': ['bar']
+    });
+    google.charts.setOnLoadCallback(drawChart);
   </script>
-
-</head>
-
-<body>
-
-  <?php include './controller/navbar.php'; ?>
 
   <div class="container">
     <div id="columnchart_material" style="width: 100%; height: 500px;"></div>
   </div>
 
   <div class="container">
-    Our most sold toys:
-    <br>
-    <div style="justify-content: center; display: flex; flex-wrap: wrap;">
-      <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Boxy Boo</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        Our most sold toys:
+        <br>
+        <div style="justify-content: center; display: flex; flex-wrap: wrap;">
+          <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Boxy Boo</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Bron</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Bubba Bubbaphant</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Bron</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Bubba Bubbaphant</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+
+  <?php
+
+  $boss = $_SESSION['user_email'];
+
+  ?>
 
 </body>
 
