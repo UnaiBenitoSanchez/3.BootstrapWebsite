@@ -73,6 +73,8 @@ $factoryName = getFactoryNameByBoss($bossEmail);
   <?php include './controller/navbar.php'; ?>
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- Mattel -->
   <script type="text/javascript">
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
@@ -114,7 +116,7 @@ $factoryName = getFactoryNameByBoss($bossEmail);
         }
       };
 
-      var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material1'));
       chart.draw(data, google.charts.Bar.convertOptions(options));
     }
 
@@ -124,9 +126,183 @@ $factoryName = getFactoryNameByBoss($bossEmail);
     google.charts.setOnLoadCallback(drawChart);
   </script>
 
+  <!-- Lego -->
+  <script type="text/javascript">
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Company', 'Sales', 'Production', 'Profit'],
+        ['Hasbro', 38983746, 43240000, 4000000],
+        ['Bandai', 50983746, 62240000, 8000000],
+        ['Playtime Co.', 63983746, 75240000, 10000000],
+        ['MGA Entertainment', 43983746, 56240000, 6000000]
+      ]);
+
+      var options = {
+        chart: {
+          title: 'We have better performance ',
+          subtitle: 'per month than other companies',
+        },
+        backgroundColor: {
+          fill: 'transparent'
+        },
+        chartArea: {
+          width: '80%',
+        },
+        legend: {
+          textStyle: {
+            color: 'white'
+          }
+        },
+        hAxis: {
+          textStyle: {
+            color: 'white'
+          }
+        },
+        vAxis: {
+          textStyle: {
+            color: 'white'
+          }
+        },
+        titleTextStyle: {
+          color: 'white'
+        }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material2'));
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+
+    google.charts.load('current', {
+      'packages': ['bar']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+  </script>
+
+  <!-- Nerf -->
+  <script type="text/javascript">
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Company', 'Sales', 'Production', 'Profit'],
+        ['Hasbro', 38983746, 43240000, 4000000],
+        ['Bandai', 50983746, 62240000, 8000000],
+        ['Playtime Co.', 63983746, 75240000, 10000000],
+        ['MGA Entertainment', 43983746, 56240000, 6000000]
+      ]);
+
+      var options = {
+        chart: {
+          title: 'We have better performance ',
+          subtitle: 'per month than other companies',
+        },
+        backgroundColor: {
+          fill: 'transparent'
+        },
+        chartArea: {
+          width: '80%',
+        },
+        legend: {
+          textStyle: {
+            color: 'white'
+          }
+        },
+        hAxis: {
+          textStyle: {
+            color: 'white'
+          }
+        },
+        vAxis: {
+          textStyle: {
+            color: 'white'
+          }
+        },
+        titleTextStyle: {
+          color: 'white'
+        }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material3'));
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+
+    google.charts.load('current', {
+      'packages': ['bar']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+  </script>
+
+  <!-- Playtime Co. -->
+  <script type="text/javascript">
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Company', 'Sales', 'Production', 'Profit'],
+        ['Hasbro', 38983746, 43240000, 4000000],
+        ['Bandai', 50983746, 62240000, 8000000],
+        ['Playtime Co.', 63983746, 75240000, 10000000],
+        ['MGA Entertainment', 43983746, 56240000, 6000000]
+      ]);
+
+      var options = {
+        chart: {
+          title: 'We have better performance ',
+          subtitle: 'per month than other companies',
+        },
+        backgroundColor: {
+          fill: 'transparent'
+        },
+        chartArea: {
+          width: '80%',
+        },
+        legend: {
+          textStyle: {
+            color: 'white'
+          }
+        },
+        hAxis: {
+          textStyle: {
+            color: 'white'
+          }
+        },
+        vAxis: {
+          textStyle: {
+            color: 'white'
+          }
+        },
+        titleTextStyle: {
+          color: 'white'
+        }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material4'));
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+
+    google.charts.load('current', {
+      'packages': ['bar']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+  </script>
+
+  <?php if ($factoryName == 'Mattel') : ?>
+    <div class="container">
+      <div id="columnchart_material1" style="width: 100%; height: 500px;"></div>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($factoryName == 'Lego') : ?>
+    <div class="container">
+      <div id="columnchart_material2" style="width: 100%; height: 500px;"></div>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($factoryName == 'Nerf') : ?>
+    <div class="container">
+      <div id="columnchart_material3" style="width: 100%; height: 500px;"></div>
+    </div>
+  <?php endif; ?>
+
   <?php if ($factoryName == 'Playtime Co.') : ?>
     <div class="container">
-      <div id="columnchart_material" style="width: 100%; height: 500px;"></div>
+      <div id="columnchart_material4" style="width: 100%; height: 500px;"></div>
     </div>
 
     <div class="container">
