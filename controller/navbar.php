@@ -27,6 +27,9 @@
                     <a class="nav-link" href="dashboard.php">Products from your factory</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="graphics.php">Production graphics</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="factory.php">Your factory</a>
                 </li>
                 <li class="nav-item">

@@ -30,13 +30,6 @@ session_start();
         #addProductFooter.expanded {
             max-height: 1100px;
         }
-
-        .floating-button {
-            position: fixed;
-            top: 70px;
-            right: 20px;
-            z-index: 100;
-        }
     </style>
     <style>
         body {
@@ -92,8 +85,6 @@ session_start();
             </form>
         </div>
     </footer>
-
-    <a href="graphics.php" class="btn btn-success floating-button">See Production Graphics</a>
 
     <?php
 

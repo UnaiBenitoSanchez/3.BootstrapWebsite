@@ -94,16 +94,6 @@
         }
     </script>
 
-
-    <style>
-        .floating-button {
-            position: fixed;
-            top: 70px;
-            right: 20px;
-            z-index: 100;
-        }
-    </style>
-
     <!-- title -->
     <title>Inventory management dashboard</title>
 
@@ -112,8 +102,6 @@
 <body>
 
     <?php include './controller/navbar.php'; ?>
-
-    <a href="dashboard.php" class="btn btn-success floating-button">See products descriptions</a>
 
     <div class="container-fluid mt-4 col-lg-10">
         <div class="row">
