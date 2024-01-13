@@ -25,6 +25,7 @@ session_start();
             max-height: 50px;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
+            border-radius: 15px; 
         }
 
         #addProductFooter.expanded {
@@ -54,7 +55,8 @@ session_start();
 
     <footer class="bg-body-tertiary text-center text-lg-start fixed-bottom" id="addProductFooter">
         <div class="container mt-4">
-            <h5>Add New Product</h5>
+        <div id="footerIndicator" class="footer-indicator"></div>
+            <center><h5>Add New Product</h5></center>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="product_name" class="form-label">Product Name</label>
