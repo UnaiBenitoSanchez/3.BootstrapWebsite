@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <?php include './controller/head.php'; ?>
 
     <style>
         body {
@@ -11,8 +12,6 @@
             background-repeat: no-repeat;
         }
     </style>
-
-    <?php include './controller/head.php'; ?>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -99,11 +98,9 @@
 
     <!-- title -->
     <title>Inventory management dashboard</title>
-
 </head>
 
 <body>
-
     <?php include './controller/navbar.php'; ?>
 
     <div class="container-fluid mt-4 col-lg-10">
@@ -125,7 +122,6 @@
     <?php
     $conn = null;
     ?>
-
 </body>
 
 </html>

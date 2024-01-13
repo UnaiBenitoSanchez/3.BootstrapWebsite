@@ -25,19 +25,14 @@ function getFactoryNameByBoss($bossEmail)
 
 $bossEmail = $_SESSION['user_email'];
 $factoryName = getFactoryNameByBoss($bossEmail);
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
   <?php include './controller/head.php'; ?>
-
-  <!-- title -->
   <title>Inventory management dashboard</title>
-
   <style>
     body {
       background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/factory.jpg');
@@ -66,228 +61,102 @@ $factoryName = getFactoryNameByBoss($bossEmail);
       }
     }
   </style>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <?php
+  // Common Google Charts library loading logic
+  echo '<script type="text/javascript">';
+  echo 'google.charts.load(\'current\', {\'packages\': [\'bar\']});';
+  echo '</script>';
+  ?>
 </head>
 
 <body>
-
   <?php include './controller/navbar.php'; ?>
 
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <?php
+  // Common function to draw charts
+  echo '<script type="text/javascript">';
+  echo 'function drawChart(data, chartElementId, chartTitle) {';
+  echo 'var options = {';
+  echo 'chart: {';
+  echo 'title: chartTitle,';
+  echo 'subtitle: \'per month than other companies\',';
+  echo '},';
+  echo 'backgroundColor: {';
+  echo 'fill: \'transparent\'';
+  echo '},';
+  echo 'chartArea: {';
+  echo 'width: \'80%\',';
+  echo '},';
+  echo 'legend: {';
+  echo 'textStyle: {';
+  echo 'color: \'white\'';
+  echo '}';
+  echo '},';
+  echo 'hAxis: {';
+  echo 'textStyle: {';
+  echo 'color: \'white\'';
+  echo '}';
+  echo '},';
+  echo 'vAxis: {';
+  echo 'textStyle: {';
+  echo 'color: \'white\'';
+  echo '}';
+  echo '},';
+  echo 'titleTextStyle: {';
+  echo 'color: \'white\'';
+  echo '}';
+  echo '};';
 
-  <!-- Mattel -->
-  <script type="text/javascript">
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['Company', 'Sales', 'Production', 'Profit'],
-        ['Mattel', 63983746, 75240000, 10000000],
-        ['Melissa & Doug', 28983746, 33240000, 2000000],
-        ['VTech', 50983746, 62240000, 8000000],
-        ['Spin Master', 53983746, 66240000, 6000000]
-      ]);
+  echo 'var chart = new google.charts.Bar(document.getElementById(chartElementId));';
+  echo 'var chartData = google.visualization.arrayToDataTable(data);';
+  echo 'chart.draw(chartData, google.charts.Bar.convertOptions(options));';
+  echo '}';
+  echo '</script>';
+  ?>
 
-      var options = {
-        chart: {
-          title: 'We have better performance ',
-          subtitle: 'per month than other companies',
-        },
-        backgroundColor: {
-          fill: 'transparent'
-        },
-        chartArea: {
-          width: '80%',
-        },
-        legend: {
-          textStyle: {
-            color: 'white'
-          }
-        },
-        hAxis: {
-          textStyle: {
-            color: 'white'
-          }
-        },
-        vAxis: {
-          textStyle: {
-            color: 'white'
-          }
-        },
-        titleTextStyle: {
-          color: 'white'
-        }
-      };
+  <?php
+  // Individual chart data
+  $mattelChartData = [
+    ['Company', 'Sales', 'Production', 'Profit'],
+    ['Mattel', 63983746, 75240000, 10000000],
+    ['Melissa & Doug', 28983746, 33240000, 2000000],
+    ['VTech', 50983746, 62240000, 8000000],
+    ['Spin Master', 53983746, 66240000, 6000000]
+  ];
 
-      var chart = new google.charts.Bar(document.getElementById('columnchart_material1'));
-      chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
+  $legoChartData = [
+    ['Company', 'Sales', 'Production', 'Profit'],
+    ['Ravensburger', 38983746, 43240000, 4000000],
+    ['Lego', 63983746, 75240000, 10000000],
+    ['Fisher-Price', 50983746, 62240000, 8000000],
+    ['Playmobil', 43983746, 56240000, 6000000]
+  ];
 
-    google.charts.load('current', {
-      'packages': ['bar']
-    });
-    google.charts.setOnLoadCallback(drawChart);
-  </script>
+  $nerfChartData = [
+    ['Company', 'Sales', 'Production', 'Profit'],
+    ['LeapFrog', 38983746, 43240000, 5000000],
+    ['Tomy', 40983746, 52240000, 7000000],
+    ['Nerf', 63983746, 75240000, 10000000],
+    ['WowWee', 23983746, 36240000, 3000000]
+  ];
 
-  <!-- Lego -->
-  <script type="text/javascript">
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['Company', 'Sales', 'Production', 'Profit'],
-        ['Ravensburger', 38983746, 43240000, 4000000],
-        ['Lego', 63983746, 75240000, 10000000],
-        ['Fisher-Price', 50983746, 62240000, 8000000],
-        ['Playmobil', 43983746, 56240000, 6000000]
-      ]);
+  $playtimeCoChartData = [
+    ['Company', 'Sales', 'Production', 'Profit'],
+    ['Naipes Heraclio Fournier', 38983746, 43240000, 4000000],
+    ['Bandai', 50983746, 62240000, 8000000],
+    ['MGA Entertainment', 23983746, 36240000, 4000000],
+    ['Playtime Co.', 63983746, 75240000, 10000000]
+  ];
+  ?>
 
-      var options = {
-        chart: {
-          title: 'We have better performance ',
-          subtitle: 'per month than other companies',
-        },
-        backgroundColor: {
-          fill: 'transparent'
-        },
-        chartArea: {
-          width: '80%',
-        },
-        legend: {
-          textStyle: {
-            color: 'white'
-          }
-        },
-        hAxis: {
-          textStyle: {
-            color: 'white'
-          }
-        },
-        vAxis: {
-          textStyle: {
-            color: 'white'
-          }
-        },
-        titleTextStyle: {
-          color: 'white'
-        }
-      };
-
-      var chart = new google.charts.Bar(document.getElementById('columnchart_material2'));
-      chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
-
-    google.charts.load('current', {
-      'packages': ['bar']
-    });
-    google.charts.setOnLoadCallback(drawChart);
-  </script>
-
-  <!-- Nerf -->
-  <script type="text/javascript">
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['Company', 'Sales', 'Production', 'Profit'],
-        ['LeapFrog', 38983746, 43240000, 5000000],
-        ['Tomy', 40983746, 52240000, 7000000],
-        ['Nerf', 63983746, 75240000, 10000000],
-        ['WowWee', 23983746, 36240000, 3000000]
-      ]);
-
-      var options = {
-        chart: {
-          title: 'We have better performance ',
-          subtitle: 'per month than other companies',
-        },
-        backgroundColor: {
-          fill: 'transparent'
-        },
-        chartArea: {
-          width: '80%',
-        },
-        legend: {
-          textStyle: {
-            color: 'white'
-          }
-        },
-        hAxis: {
-          textStyle: {
-            color: 'white'
-          }
-        },
-        vAxis: {
-          textStyle: {
-            color: 'white'
-          }
-        },
-        titleTextStyle: {
-          color: 'white'
-        }
-      };
-
-      var chart = new google.charts.Bar(document.getElementById('columnchart_material3'));
-      chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
-
-    google.charts.load('current', {
-      'packages': ['bar']
-    });
-    google.charts.setOnLoadCallback(drawChart);
-  </script>
-
-  <!-- Playtime Co. -->
-  <script type="text/javascript">
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['Company', 'Sales', 'Production', 'Profit'],
-        ['Naipes Heraclio Fournier', 38983746, 43240000, 4000000],
-        ['Bandai', 50983746, 62240000, 8000000],
-        ['MGA Entertainment', 23983746, 36240000, 4000000],
-        ['Playtime Co.', 63983746, 75240000, 10000000]
-      ]);
-
-      var options = {
-        chart: {
-          title: 'We have better performance ',
-          subtitle: 'per month than other companies',
-        },
-        backgroundColor: {
-          fill: 'transparent'
-        },
-        chartArea: {
-          width: '80%',
-        },
-        legend: {
-          textStyle: {
-            color: 'white'
-          }
-        },
-        hAxis: {
-          textStyle: {
-            color: 'white'
-          }
-        },
-        vAxis: {
-          textStyle: {
-            color: 'white'
-          }
-        },
-        titleTextStyle: {
-          color: 'white'
-        }
-      };
-
-      var chart = new google.charts.Bar(document.getElementById('columnchart_material4'));
-      chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
-
-    google.charts.load('current', {
-      'packages': ['bar']
-    });
-    google.charts.setOnLoadCallback(drawChart);
-  </script>
-
-  <!-- Mattel -->
   <?php if ($factoryName == 'Mattel') : ?>
     <div class="container">
       <div id="columnchart_material1" style="width: 100%; height: 500px;"></div>
     </div>
 
+    <!-- Display Mattel cards -->
     <div class="container">
       Our most sold toys:
       <br>
@@ -317,12 +186,12 @@ $factoryName = getFactoryNameByBoss($bossEmail);
     </div>
   <?php endif; ?>
 
-  <!-- Lego -->
   <?php if ($factoryName == 'Lego') : ?>
     <div class="container">
       <div id="columnchart_material2" style="width: 100%; height: 500px;"></div>
     </div>
 
+    <!-- Display Lego cards -->
     <div class="container">
       Our most sold toys:
       <br>
@@ -344,20 +213,20 @@ $factoryName = getFactoryNameByBoss($bossEmail);
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
           <img src="img/lego6.jpg" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Natural History Museum</h5>
-            <p class="card-text">Discover the first-ever museum to join the Modular Buildings collection. Home to an array of brick-built exhibits it features dual skylights that allow light to permeate the building’s 2 levels, illuminating the towering brachiosaurus skeleton and collection of treasures within.</p>
+            <h5 class="card-title">Ideas International Space Station</h5>
+            <p class="card-text">Challenge your construction skills and evoke nostalgia with this LEGO Ideas International Space Station. A set developed in collaboration with NASA, this space station building kit includes a toy shuttle, three mini cargo spacecraft, and two astronaut figures to create a spectacular display and rekindle nostalgic memories of childhood LEGO projects.</p>
           </div>
         </div>
       </div>
     </div>
   <?php endif; ?>
 
-  <!-- Nerf -->
   <?php if ($factoryName == 'Nerf') : ?>
     <div class="container">
       <div id="columnchart_material3" style="width: 100%; height: 500px;"></div>
     </div>
 
+    <!-- Display Nerf cards -->
     <div class="container">
       Our most sold toys:
       <br>
@@ -365,39 +234,34 @@ $factoryName = getFactoryNameByBoss($bossEmail);
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
           <img src="img/nerf4.jpg" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Nerf DinoSquad Rex-Rampage</h5>
-            <p class="card-text">A motorized launcher that roars like the king of the dinosaurs!!!
-              It has a 10 dart holder in the butt so you have projectiles for easy reloading.
-              Includes 20 Nerf foam darts for quick firing.
-              It works with 4 AAA batteries. NOT included.
-              Recommended age: +8 years old.
-              Safety Warnings: Do not point at eyes or face. Do not modify darts or launcher. Use only darts designated for the launcher. ALWAYS wear protective goggles.</p>
+            <h5 class="card-title">Nerf N-Strike Elite Disruptor Blaster</h5>
+            <p class="card-text">This quick-draw blaster has a rotating drum that holds up to 6 Elite darts. Choose your target and fire 1 dart at a time, or unleash all 6 darts in rapid succession with slam-fire action. To prime the blaster, pull the slide back and release. Check the indicator; if it’s orange, the blaster is primed and ready to fire. The The Nerf N-Strike Elite Disruptor fires darts up to 90 feet (27 meters).</p>
           </div>
         </div>
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
           <img src="img/nerf5.jpg" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Nerf Alpha Strike Slinger SD-1</h5>
-            <p class="card-text">The Slinger SD-1 Aiming Set includes 1 launcher, 2 target pieces and 4 Nerf Elite darts. The launcher launches 1 dart at a time and is easy to use. Insert 1 dart into the barrel, pull the handle to set it up and pull the trigger to launch 1 dart. Practice your aiming skills with the 2 target pieces that you can put together to form 1 whole target.</p>
+            <h5 class="card-title">Nerf Rival Phantom Corps Kronos XVIII-500</h5>
+            <p class="card-text">Phantom Corps is a group of rogue specialists who may join Team Red or Team Blue today, then challenge them tomorrow. Nerf Rival battles will never be the same! Go into battle as a member of the Phantom Corps team with the breech-loading Kronos XVIII-500 blaster that features the team’s identifying color and logo.</p>
           </div>
         </div>
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
           <img src="img/nerf6.jpg" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Nerf Alpha Strike - Mission Set</h5>
-            <p class="card-text">This 31-piece Nerf Alpha Strike Mission Set includes 4 launchers, 25 darts and targets to practice your aim and play Nerf games. Perfect for gifts, parties or play anytime! Includes 2 Stinger SD-1 launchers, 1 Cobra RC-6 launcher, 1 Tiger DB-2 launcher and 2 target pieces that can be snapped together to form 1 whole target.</p>
+            <h5 class="card-title">Nerf N-Strike Elite Rhino-Fire Blaster</h5>
+            <p class="card-text">Dominate any battlefield with the double-barrel assault of the Nerf N-Strike Elite Rhino-Fire blaster! You can launch a blizzard of darts at targets up to 90 feet away from the blaster’s two barrels, and its two drums hold 25 darts each. Remove the tripod when you’re on the move or attach it to steady your shots when you’re firing from a secure location. You'll overwhelm the competition with the motorized, rapid-fire speed of the Rhino-Fire blaster!</p>
           </div>
         </div>
       </div>
     </div>
   <?php endif; ?>
 
-  <!-- Playtime Co. -->
   <?php if ($factoryName == 'Playtime Co.') : ?>
     <div class="container">
       <div id="columnchart_material4" style="width: 100%; height: 500px;"></div>
     </div>
 
+    <!-- Display Playtime Co. cards -->
     <div class="container">
       Our most sold toys:
       <br>
@@ -427,6 +291,15 @@ $factoryName = getFactoryNameByBoss($bossEmail);
     </div>
   <?php endif; ?>
 
+  <script>
+    <?php
+    // Individual chart drawing calls
+    echo 'google.charts.setOnLoadCallback(function() { drawChart(' . json_encode($mattelChartData) . ', "columnchart_material1", "Mattel Sales, Production, and Profit"); });';
+    echo 'google.charts.setOnLoadCallback(function() { drawChart(' . json_encode($legoChartData) . ', "columnchart_material2", "Lego Sales, Production, and Profit"); });';
+    echo 'google.charts.setOnLoadCallback(function() { drawChart(' . json_encode($nerfChartData) . ', "columnchart_material3", "Nerf Sales, Production, and Profit"); });';
+    echo 'google.charts.setOnLoadCallback(function() { drawChart(' . json_encode($playtimeCoChartData) . ', "columnchart_material4", "Playtime Co. Sales, Production, and Profit"); });';
+    ?>
+  </script>
 </body>
 
 </html>

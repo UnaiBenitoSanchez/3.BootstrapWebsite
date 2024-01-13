@@ -1,6 +1,8 @@
 $(document).ready(function () {
+    // Charge data at start
     loadData();
 
+    // Function to charge data by AJAX
     function loadData() {
         $.ajax({
             url: 'getData.php',
@@ -16,16 +18,19 @@ $(document).ready(function () {
         });
     }
 
+    // Function to render the products on the container
     function renderProducts(data) {
         var productsContainer = $('#products-container');
         productsContainer.empty();
 
         var totalProducts = 0;
 
+        // Calculate the total of the products
         data.forEach(function (product) {
             totalProducts += parseFloat(product.available_quantity);
         });
 
+        // Render every product
         data.forEach(function (product) {
             console.log("Image:", product.image);
             var productDiv = createProductCard(product, totalProducts);
@@ -33,11 +38,12 @@ $(document).ready(function () {
         });
     }
 
+    // Function to create the product card
     function createProductCard(product, totalProducts) {
         var availableQuantity = parseFloat(product.available_quantity);
         var price = parseFloat(product.price);
         var percentage = totalProducts !== 0 ? (availableQuantity / totalProducts) * 100 : 0;
-    
+
         var productDiv = $('<div>').addClass('col-md-4 mb-6');
         productDiv.html('<div class="card">\
                 <div class="card-body">\
@@ -56,41 +62,45 @@ $(document).ready(function () {
                     <button style="margin-top: 10px" class="btn btn-danger btn-delete" data-product-id="' + product.id_product + '">Delete</button>\
                 </div>\
             </div>');
-    
+
         return productDiv;
     }    
 
+    // Manage the click on the edit button
     $(document).on('click', '.btn-edit', function () {
         handleEditButtonClick($(this));
     });
 
+    // Manage the click on the confirm button
     $(document).on('click', '.btn-confirm', function () {
         handleConfirmButtonClick($(this));
     });
 
+    // Manage the click on the delete button
     $(document).on('click', '.btn-delete', function () {
         handleDeleteButtonClick($(this));
     });
 
+    // Function to manage the click on the edit button
     function handleEditButtonClick(button) {
         var productDiv = button.closest('.card-body');
         var name = productDiv.find('.card-title').text();
         var description = productDiv.find('.card-text:eq(0)').text();
         var quantity = productDiv.find('.card-text:eq(1)').text().trim().split(':')[1];
         var price = productDiv.find('.price-editable').text();
-    
+
         var descriptionPart = description.replace(/^Product description:\s*/, '');
-    
         var quantityPart = quantity.replace(/^Quantity:\s*/, '');
-    
+
         productDiv.find('.card-title').html('<input type="text" class="form-control" value="' + name + '">');
         productDiv.find('.card-text:eq(0)').html('<p>Product description:</p><textarea class="form-control">' + descriptionPart + '</textarea>');
         productDiv.find('.card-text:eq(1)').html('<p>Quantity:</p><input type="text" class="form-control" value="' + quantityPart + '">');
         productDiv.find('.price-editable').html('<input type="text" class="form-control" value="' + price + '">');
-    
+
         button.removeClass('btn-edit').addClass('btn-confirm').text('Confirm');
     }    
-    
+
+    // Function to manage the click on the confirm button
     function handleConfirmButtonClick(button) {
         var productDiv = button.closest('.card-body');
         var productId = button.data('product-id');
@@ -119,6 +129,7 @@ $(document).ready(function () {
         });
     }
 
+    // Function to manage the click on the delete button
     function handleDeleteButtonClick(button) {
         var productId = button.data('product-id');
 

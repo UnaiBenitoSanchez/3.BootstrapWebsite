@@ -1,11 +1,11 @@
 <?php
 include 'db_connect.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <?php include './controller/head.php'; ?>
 
     <!-- css -->
@@ -13,7 +13,7 @@ include 'db_connect.php';
 
     <!-- title -->
     <title>Inventory management dashboard - Login/Register</title>
-    
+
 </head>
 
 <body>
@@ -102,7 +102,6 @@ include 'db_connect.php';
 
             <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
-
                 function textToBrainfuck($text)
                 {
                     $brainfuckCode = "";
@@ -129,10 +128,8 @@ include 'db_connect.php';
 
                         if ($user) {
                             if ($encryptedPasswordInput == $user['password']) {
-
                                 session_start();
                                 $_SESSION['user_email'] = $email;
-
                                 echo '<script>window.location.href = "landing_page.php";</script>';
                                 exit();
                             } else {

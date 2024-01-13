@@ -10,16 +10,16 @@ session_start();
 
     <?php include './controller/head.php'; ?>
 
-    <!-- css -->
+    <!-- CSS -->
     <link rel="stylesheet" href="css/dashboard.css">
 
-    <!-- js -->
+    <!-- JS -->
     <script src="js/dashboard.js"></script>
 
-    <!-- title -->
+    <!-- Title -->
     <title>Inventory Management Dashboard - Products</title>
 
-    <!-- style -->
+    <!-- Style -->
     <style>
         #addProductFooter {
             max-height: 50px;

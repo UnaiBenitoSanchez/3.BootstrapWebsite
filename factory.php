@@ -8,7 +8,7 @@ include 'db_connect.php';
 <head>
     <?php include './controller/head.php'; ?>
     <!-- title -->
-    <title>Inventory management dashboard - Factory</title>
+    <title>Inventory Management Dashboard - Factory</title>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
@@ -55,26 +55,21 @@ include 'db_connect.php';
                             <div class="card-body">
                                 <h5 class="card-title">Factory ID: <?php echo $row['id_factory']; ?></h5>
                                 <div id="factoryContent">
-
                                     <p class="card-text">Factory Name: <span id="factoryName"><?php echo $row['factory_name']; ?></span></p>
                                     <p class="card-text">Boss Name: <?php echo $row['boss_name']; ?></p>
                                     <p class="card-text">Factory Address: <span id="factoryAddress"><?php echo $factoryAddress; ?></span></p>
                                     <p class="card-text">Number of Employees: <?php echo $row['employee_count']; ?></p>
                                 </div>
                                 <div id="factoryEdit" style="display: none;">
-
                                     <label for="editFactoryName">Factory Name:</label>
                                     <input type="text" id="editFactoryName" value="<?php echo $row['factory_name']; ?>"><br>
                                     <label for="editEmployeeCount">Number of Employees:</label>
                                     <input type="text" id="editEmployeeCount" value="<?php echo $row['employee_count']; ?>"><br>
                                 </div>
-
                                 <div id="map" style="height: 300px;"></div>
                                 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
                                 <button class="btn btn-primary" onclick="toggleEdit()">Edit</button>
                                 <button class="btn btn-danger" onclick="saveChanges(<?php echo $row['id_factory']; ?>)" style="display: none;">Save</button>
-
                                 <script>
                                     var map = L.map('map').setView([0, 0], 2);
                                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
