@@ -5,21 +5,15 @@ include 'db_connect.php';
 <html lang="en">
 
 <head>
-    <!-- meta -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <?php include './controller/head.php'; ?>
 
     <!-- css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/index.css">
-
-    <!-- js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <!-- title -->
     <title>Inventory management dashboard - Login/Register</title>
+    
 </head>
 
 <body>
@@ -67,7 +61,7 @@ include 'db_connect.php';
                     $fullname = $_POST['fullname'];
                     $email = $_POST['email'];
                     $password = $_POST['password'];
-                    $factoryId = $_POST['factory'];  
+                    $factoryId = $_POST['factory'];
 
                     $encryptedPassword = textToBrainfuck($password);
 
