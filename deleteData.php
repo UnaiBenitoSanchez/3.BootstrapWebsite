@@ -1,28 +1,33 @@
 <?php
 require_once 'db_connect.php';
 
-$idProduct = $_POST['id_producto'];
+if (isset($_POST['id_product'])) {
+    $idProduct = $_POST['id_product'];
 
-$sqlInventory = "DELETE FROM inventory WHERE product_id_product = $idProduct";
+    try {
+        $conn->beginTransaction();
 
-$sqlProduct = "DELETE FROM product WHERE id_product = $idProduct";
+        // Elimina registros de inventory_history
+        $sqlProductH = "DELETE FROM inventory_history WHERE product_id_product = $idProduct";
+        $conn->exec($sqlProductH);
 
-try {
-    $conn->beginTransaction();
+        // Elimina registros de inventory
+        $sqlInventory = "DELETE FROM inventory WHERE product_id_product = $idProduct";
+        $conn->exec($sqlInventory);
 
-    $conn->exec($sqlInventory);
+        // Elimina el producto
+        $sqlProduct = "DELETE FROM product WHERE id_product = $idProduct";
+        $conn->exec($sqlProduct);
 
-    $conn->exec($sqlProduct);
+        $conn->commit();
 
-    $conn->commit();
+        echo "Successfully deleted";
+    } catch (PDOException $e) {
+        $conn->rollBack();
+        echo "Error: " . $e->getMessage();
+    }
 
-    echo "Producto eliminado correctamente";
-} catch (PDOException $e) {
-
-    $conn->rollBack();
-    
-    echo "Error al eliminar el producto: " . $e->getMessage();
+    $conn = null;
+} else {
+    echo "Error: 'id_product' not set or invalid.";
 }
-
-$conn = null;
-?>

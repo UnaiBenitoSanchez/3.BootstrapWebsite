@@ -12,10 +12,13 @@ include 'db_connect.php';
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-    body {
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/factory.jpg');
-    }
-  </style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/factory.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+    </style>
 </head>
 
 <body>
@@ -65,7 +68,7 @@ include 'db_connect.php';
                                     <label for="editEmployeeCount">Number of Employees:</label>
                                     <input type="text" id="editEmployeeCount" value="<?php echo $row['employee_count']; ?>"><br>
                                 </div>
-                        
+
                                 <div id="map" style="height: 300px;"></div>
                                 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
@@ -129,7 +132,7 @@ include 'db_connect.php';
                                                 location.reload();
                                             }
                                         };
-                                        
+
                                         xhr.send("factoryId=" + factoryId +
                                             "&editedFactoryName=" + encodeURIComponent(editedFactoryName) +
                                             "&editedEmployeeCount=" + editedEmployeeCount);
