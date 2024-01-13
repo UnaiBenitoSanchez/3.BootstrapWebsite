@@ -76,14 +76,6 @@ session_start();
                     <label for="product_quantity" class="form-label">Initial Quantity</label>
                     <input type="number" class="form-control" id="product_quantity" name="product_quantity">
                 </div>
-                <div class="mb-3">
-                    <label for="product_quantity_add" class="form-label">Quantity created every hour</label>
-                    <input type="number" class="form-control" id="product_quantity_add" name="product_quantity_add">
-                </div>
-                <div class="mb-3">
-                    <label for="product_quantity_delete" class="form-label">Quantity sold every hour</label>
-                    <input type="number" class="form-control" id="product_quantity_delete" name="product_quantity_delete">
-                </div>
                 <button type="submit" class="btn btn-primary" name="addProd">Add Product</button>
             </form>
         </div>
@@ -96,8 +88,6 @@ session_start();
         $productDescription = $_POST["product_description"];
         $productPrice = $_POST["product_price"];
         $initialQuantity = $_POST["product_quantity"];
-        $quantityToAdd = $_POST["product_quantity_add"];
-        $quantityToDelete = $_POST["product_quantity_delete"];
 
         $bossEmail = $_SESSION['user_email'];
 
@@ -124,38 +114,35 @@ session_start();
             $stmt = $conn->prepare("INSERT INTO inventory_history (product_id_product, change_quantity, change_type) VALUES (?, ?, 'Add')");
             $stmt->execute([$productId, $initialQuantity]);
 
-            if (!empty($quantityToDelete)) {
-                $subtractEventSQL = "
+            $subtractEventSQL = "
                 CREATE EVENT IF NOT EXISTS subtract_quantity_event_$productName
-                ON SCHEDULE EVERY 1 HOUR
+                ON SCHEDULE EVERY RAND()*(5-1)+1 HOUR
                 DO
                 BEGIN
 
                   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName'));
                 
                   UPDATE BootstrapWebsite.inventory
-                  SET available_quantity = GREATEST(available_quantity - $quantityToDelete, 0)
+                  SET available_quantity = GREATEST(available_quantity - RAND()*(100-50)+50, 0)
                   WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName');
                 
                   INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
                   VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName')), 'Subtract');
                 END;
                 ";
-                $stmt = $conn->prepare($subtractEventSQL);
-                $stmt->execute();
-            }
+            $stmt = $conn->prepare($subtractEventSQL);
+            $stmt->execute();
 
-            if (!empty($quantityToAdd)) {
-                $addEventSQL = "
+            $addEventSQL = "
                 CREATE EVENT IF NOT EXISTS add_quantity_event_$productName
-                ON SCHEDULE EVERY 1 HOUR
+                ON SCHEDULE EVERY RAND()*(5-1)+1 HOUR
                 DO
                 BEGIN
            
                   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName'));
                 
                   UPDATE BootstrapWebsite.inventory
-                  SET available_quantity = available_quantity + $quantityToAdd
+                  SET available_quantity = available_quantity + RAND()*(100-50)+50
                   WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = '$productName');
                 
                   INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
@@ -163,9 +150,9 @@ session_start();
                 
                   END;
                 ";
-                $stmt = $conn->prepare($addEventSQL);
-                $stmt->execute();
-            }
+                
+            $stmt = $conn->prepare($addEventSQL);
+            $stmt->execute();
         } catch (PDOException $e) {
             echo "Error inserting data: " . $e->getMessage();
         }
