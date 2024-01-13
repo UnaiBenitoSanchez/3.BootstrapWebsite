@@ -7,15 +7,12 @@ if (isset($_POST['id_product'])) {
     try {
         $conn->beginTransaction();
 
-        // Elimina registros de inventory_history
         $sqlProductH = "DELETE FROM inventory_history WHERE product_id_product = $idProduct";
         $conn->exec($sqlProductH);
 
-        // Elimina registros de inventory
         $sqlInventory = "DELETE FROM inventory WHERE product_id_product = $idProduct";
         $conn->exec($sqlInventory);
 
-        // Elimina el producto
         $sqlProduct = "DELETE FROM product WHERE id_product = $idProduct";
         $conn->exec($sqlProduct);
 
