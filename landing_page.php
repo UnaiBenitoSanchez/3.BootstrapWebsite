@@ -296,7 +296,7 @@ $factoryName = getFactoryNameByBoss($bossEmail);
           <img src="img/mattel4.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Barbie Cutie Reveal Serie Phantasy Unicorn</h5>
-            <p class="card-text">Open the box and you\'ll see inside a soft plush unicorn and four surprise bags. Remove the rainbow unicorn costume and you\'ll find a Barbie doll with long hair and sparkly details. Open the surprise bags and discover sparkly clothes, accessories, a sponge-comb and a mini unicorn.</p>
+            <p class="card-text">Open the box and you'll see inside a soft plush unicorn and four surprise bags. Remove the rainbow unicorn costume and you'll find a Barbie doll with long hair and sparkly details. Open the surprise bags and discover sparkly clothes, accessories, a sponge-comb and a mini unicorn.</p>
           </div>
         </div>
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
