@@ -189,7 +189,8 @@ INSERT INTO inventory VALUES('6','1500','2023-12-22','6','1');
 INSERT INTO boss VALUES ('2','Ole Kirk Christiansen','0l3@gmail.com','++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>');
 INSERT INTO factory VALUES ('2','Lego','456 Oak St','Houston','Texas','USA','6000');
 INSERT INTO factory_boss VALUES ('2','2');
-INSERT INTO product VALUES('7','Bouquet of Roses','A beautiful bouquet of roses made by you. Create a stylish display piece for your home or office with the LEGO® Icons Rose Bouquet adult construction set.','59.99','img/lego1.jpg','1');
+INSERT INTO product VALUES('7','Millennium Falcon','Packed with authentic details! Highly realistic detailing makes this an impressive display item. Relive the Star Wars™ saga.
+Includes two crews, so you can recreate both classic and new movies.','849.99','img/lego1.jpg','1');
 INSERT INTO inventory VALUES('7','1200','2024-01-03','7','2');
 INSERT INTO product VALUES('8','Orient Express Train','A paragon of French luxury and an engineering marvel for railroad enthusiasts around the world, the Orient-Express has been stirring imaginations for over 140 years. This new LEGO® Ideas set features interpretations of the train\'s most perfected details along with 8 new character minifigures - it\'s your ticket to endless play and display possibilities!','299.99','img/lego2.jpg','1');
 INSERT INTO inventory VALUES('8','2300','2024-01-03','8','2');
@@ -462,39 +463,39 @@ END;
 DELIMITER ;
 
 -- Lego--------------------------------------------------------------------------------------------------------------
--- Event to delete from Bouquet of Roses
+-- Event to delete from Millennium Falcon
 DELIMITER //
-CREATE EVENT IF NOT EXISTS subtract_quantity_event_Bouquet_of_Roses
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_Millennium_Falcon
 ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
 
-  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bouquet of Roses'));
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Millennium Falcon'));
 
   UPDATE BootstrapWebsite.inventory
   SET available_quantity = GREATEST(available_quantity - 100, 0)
-  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bouquet of Roses');
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Millennium Falcon');
 
   INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
-  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bouquet of Roses'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bouquet of Roses')), 'Subtract');
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Millennium Falcon'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Millennium Falcon')), 'Subtract');
 END;
 //
 DELIMITER ;
 
--- Event to add to Bouquet of Roses
+-- Event to add to Millennium Falcon
 DELIMITER //
-CREATE EVENT IF NOT EXISTS add_quantity_event_Bouquet_of_Roses
+CREATE EVENT IF NOT EXISTS add_quantity_event_Millennium_Falcon
 ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
-  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bouquet of Roses'));
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Millennium Falcon'));
 
   UPDATE BootstrapWebsite.inventory
   SET available_quantity = available_quantity + 100
-  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bouquet of Roses');
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Millennium Falcon');
 
   INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
-  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bouquet of Roses'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bouquet of Roses')), 'Add');
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Millennium Falcon'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Millennium Falcon')), 'Add');
 END;
 //
 DELIMITER ;
