@@ -236,9 +236,9 @@ INSERT INTO product VALUES('23','Hoppy Hopscotch','Unafraid to hop where others 
 INSERT INTO inventory VALUES('23','2000','2024-01-03','23','4');
 INSERT INTO product VALUES('24','KickinChicken','This is KickinChicken, the cool kid of the crew, and he maintains that sense of cool through anything, even in the most tense of situations. Knock him down, and he\'ll pick himself up, brush himself off, and ask: "What\'s next?"','20.00','img/playtime6.jpg','1');
 INSERT INTO inventory VALUES('24','3000','2024-01-03','24','4');
-INSERT INTO product VALUES('25','PickyPiggy ','What\'s more important than play and learning? PickyPiggy knows the answer. A playful body and keen mind are fueled by what\'s put into them, which is why she encourages her friends to eat a well-balanced diet. Secretly, PB&J\'s are her favorite food.','20.00','img/playtime7.jpg','1');
+INSERT INTO product VALUES('25','PickyPiggy','What\'s more important than play and learning? PickyPiggy knows the answer. A playful body and keen mind are fueled by what\'s put into them, which is why she encourages her friends to eat a well-balanced diet. Secretly, PB&J\'s are her favorite food.','20.00','img/playtime7.jpg','1');
 INSERT INTO inventory VALUES('25','3000','2024-01-03','25','4');
-INSERT INTO product VALUES('26','CatNap ','CatNap is a calming presence for the critters and ensures he and his friends always have the right amount of sleep to jumpstart the morning\'s play! End of the day, there\'s nothing CatNap enjoys more than watching his friends sleep soundly.','20.00','img/playtime8.jpg','1');
+INSERT INTO product VALUES('26','CatNap','CatNap is a calming presence for the critters and ensures he and his friends always have the right amount of sleep to jumpstart the morning\'s play! End of the day, there\'s nothing CatNap enjoys more than watching his friends sleep soundly.','20.00','img/playtime8.jpg','1');
 INSERT INTO inventory VALUES('26','3000','2024-01-03','26','4');
 
 -- Scripts----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -353,6 +353,114 @@ END;
 //
 DELIMITER ;
 
+-- Event to delete from Barbie Cutie Reveal Serie Phantasy Unicorn 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_unicorn 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Phantasy Unicorn'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Phantasy Unicorn');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Phantasy Unicorn'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Phantasy Unicorn')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to Barbie Cutie Reveal Serie Phantasy Unicorn 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_unicorn
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Phantasy Unicorn'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Phantasy Unicorn');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Phantasy Unicorn'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Phantasy Unicorn')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete from Barbie Cutie Reveal Serie Jungle Friends Tiger 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_tiger 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Jungle Friends Tiger'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Jungle Friends Tiger');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Jungle Friends Tiger'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Jungle Friends Tiger')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to CatNap 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_tiger
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Jungle Friends Tiger'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Jungle Friends Tiger');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Jungle Friends Tiger'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Jungle Friends Tiger')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete from Disney Frozen Queen Anna & Elsa Snow Queen 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_elsaAna
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Frozen Queen Anna & Elsa Snow Queen'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Frozen Queen Anna & Elsa Snow Queen');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Frozen Queen Anna & Elsa Snow Queen'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Frozen Queen Anna & Elsa Snow Queen')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to Disney Frozen Queen Anna & Elsa Snow Queen 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_elsaAna 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Frozen Queen Anna & Elsa Snow Queen'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Frozen Queen Anna & Elsa Snow Queen');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Frozen Queen Anna & Elsa Snow Queen'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Frozen Queen Anna & Elsa Snow Queen')), 'Add');
+END;
+//
+DELIMITER ;
+
 -- Lego--------------------------------------------------------------------------------------------------------------
 -- Event to delete from Bouquet of Roses
 DELIMITER //
@@ -459,6 +567,114 @@ BEGIN
 
   INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
   VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Avengers Tower'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Avengers Tower')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete from Cherry Blossoms 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_cherry
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Cherry Blossoms'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Cherry Blossoms');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Cherry Blossoms'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Cherry Blossoms')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to Cherry Blossoms 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_cherry 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Cherry Blossoms'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Cherry Blossoms');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Cherry Blossoms'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Cherry Blossoms')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete from Disney Ariel Mini Castle 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_ariel 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Ariel Mini Castle'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Ariel Mini Castle');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Ariel Mini Castle'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Ariel Mini Castle')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to Disney Ariel Mini Castle 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_ariel 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Ariel Mini Castle'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Ariel Mini Castle');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Ariel Mini Castle'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Ariel Mini Castle')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete from Natural History Museum 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_museum
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Natural History Museum'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Natural History Museum');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Natural History Museum'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Natural History Museum')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to Natural History Museum 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_museum 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Natural History Museum'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Natural History Museum');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Natural History Museum'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Natural History Museum')), 'Add');
 END;
 //
 DELIMITER ;
@@ -573,6 +789,114 @@ END;
 //
 DELIMITER ;
 
+-- Event to delete from Nerf DinoSquad Rex-Rampage 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_rex 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf DinoSquad Rex-Rampage'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf DinoSquad Rex-Rampage');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf DinoSquad Rex-Rampage'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf DinoSquad Rex-Rampage')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to Nerf DinoSquad Rex-Rampage 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_rex 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf DinoSquad Rex-Rampage'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf DinoSquad Rex-Rampage');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf DinoSquad Rex-Rampage'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf DinoSquad Rex-Rampage')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete from Nerf Alpha Strike Slinger SD-1 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_slinger
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike Slinger SD-1'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike Slinger SD-1');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike Slinger SD-1'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike Slinger SD-1')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to Nerf Alpha Strike Slinger SD-1 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_slinger 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike Slinger SD-1'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike Slinger SD-1');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike Slinger SD-1'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike Slinger SD-1')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete from Nerf Alpha Strike - Mission Set 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_mission
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike - Mission Set'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike - Mission Set');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike - Mission Set'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike - Mission Set')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to Nerf Alpha Strike - Mission Set 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_mission
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike - Mission Set'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike - Mission Set');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike - Mission Set'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike - Mission Set')), 'Add');
+END;
+//
+DELIMITER ;
+
 -- Playtime Co.------------------------------------------------------------------------------------------------------
 -- Event to delete from Bobby BearHug
 DELIMITER //
@@ -647,7 +971,6 @@ END;
 //
 DELIMITER ;
 
-
 -- Event to delete from CraftyCorn
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_CraftyCorn
@@ -680,6 +1003,186 @@ BEGIN
 
   INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
   VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CraftyCorn'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CraftyCorn')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete from DogDay
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_DogDay
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'DogDay'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'DogDay');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'DogDay'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'DogDay')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to DogDay
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_DogDay
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'DogDay'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'DogDay');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'DogDay'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'DogDay')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete from Hoppy Hopscotch
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_Hoppy_Hopscotch
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Hoppy Hopscotch'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Hoppy Hopscotch');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Hoppy Hopscotch'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Hoppy Hopscotch')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to Hoppy Hopscotch
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_Hoppy_Hopscotch
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Hoppy Hopscotch'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Hoppy Hopscotch');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Hoppy Hopscotch'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Hoppy Hopscotch')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete from KickinChicken
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_KickinChicken
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'KickinChicken'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'KickinChicken');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'KickinChicken'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'KickinChicken')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to KickinChicken
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_KickinChicken
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'KickinChicken'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'KickinChicken');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'KickinChicken'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'KickinChicken')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete from PickyPiggy 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_PickyPiggy 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'PickyPiggy'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'PickyPiggy');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'PickyPiggy'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'PickyPiggy')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to PickyPiggy 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_PickyPiggy 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'PickyPiggy'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'PickyPiggy');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'PickyPiggy'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'PickyPiggy')), 'Add');
+END;
+//
+DELIMITER ;
+
+-- Event to delete from CatNap 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS subtract_quantity_event_CatNap 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CatNap'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = GREATEST(available_quantity - 100, 0)
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CatNap');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CatNap'),(SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Catnap')), 'Subtract');
+END;
+//
+DELIMITER ;
+
+-- Event to add to CatNap 
+DELIMITER //
+CREATE EVENT IF NOT EXISTS add_quantity_event_CatNap 
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+  SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CatNap'));
+
+  UPDATE BootstrapWebsite.inventory
+  SET available_quantity = available_quantity + 100
+  WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CatNap');
+
+  INSERT INTO BootstrapWebsite.inventory_history (product_id_product, change_quantity, change_type)
+  VALUES ((SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CatNap'), (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CatNap')), 'Add');
 END;
 //
 DELIMITER ;
