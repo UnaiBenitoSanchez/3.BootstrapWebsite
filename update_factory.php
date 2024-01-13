@@ -7,14 +7,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         // Retrieve data from the POST request
         $factoryId = $_POST['factoryId'];
-        $editedFactoryName = $_POST['editedFactoryName'];
         $editedEmployeeCount = $_POST['editedEmployeeCount'];
 
         // Prepare and execute the database update query
-        $updateSql = "UPDATE factory SET name = :editedFactoryName, employee_count = :editedEmployeeCount WHERE id_factory = :factoryId";
+        $updateSql = "UPDATE factory SET name = :employee_count = :editedEmployeeCount WHERE id_factory = :factoryId";
         $updateStmt = $conn->prepare($updateSql);
         $updateStmt->bindParam(':factoryId', $factoryId);
-        $updateStmt->bindParam(':editedFactoryName', $editedFactoryName);
         $updateStmt->bindParam(':editedEmployeeCount', $editedEmployeeCount);
         $updateStmt->execute();
 

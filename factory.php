@@ -62,7 +62,6 @@ include 'db_connect.php';
                                 </div>
                                 <div id="factoryEdit" style="display: none;">
                                     <label for="editFactoryName">Factory Name:</label>
-                                    <input type="text" id="editFactoryName" value="<?php echo $row['factory_name']; ?>"><br>
                                     <label for="editEmployeeCount">Number of Employees:</label>
                                     <input type="text" id="editEmployeeCount" value="<?php echo $row['employee_count']; ?>"><br>
                                 </div>
@@ -113,7 +112,6 @@ include 'db_connect.php';
 
                                     function saveChanges(factoryId) {
 
-                                        var editedFactoryName = document.getElementById('editFactoryName').value;
                                         var editedEmployeeCount = document.getElementById('editEmployeeCount').value;
 
                                         var xhr = new XMLHttpRequest();
@@ -129,7 +127,6 @@ include 'db_connect.php';
                                         };
 
                                         xhr.send("factoryId=" + factoryId +
-                                            "&editedFactoryName=" + encodeURIComponent(editedFactoryName) +
                                             "&editedEmployeeCount=" + editedEmployeeCount);
                                     }
 
