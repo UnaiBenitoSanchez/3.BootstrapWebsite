@@ -160,16 +160,34 @@ include 'db_connect.php';
                     ?>
                 </div>
 
-                <div class="container mt-5">
-                    <h2 style="color: white">Bosses:</h2>
-                    <div class="wrapper">
-                        <canvas id="c"></canvas>
-                    </div>
-                </div>
-
-    <?php
+            <?php
             } else {
                 echo "No factory information found for the current boss.";
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+
+        try {
+            // Ajusta la consulta SQL
+            $sql = "SELECT boss.id_boss_factory, boss.name AS boss_name
+                    FROM boss
+                    INNER JOIN factory_boss ON boss.id_boss_factory = factory_boss.boss_id_boss_factory
+                    INNER JOIN factory ON factory_boss.factory_id_factory = factory.id_factory
+                    WHERE factory.id_factory IN (
+                        SELECT factory_id_factory FROM factory_boss WHERE boss_id_boss_factory = (SELECT id_boss_factory FROM boss WHERE email = :userEmail)
+                    )";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':userEmail', $userEmail);
+            $stmt->execute();
+
+            while ($bossRow = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                // Para cada jefe, muestra un muñeco 3D
+            ?>
+                <div class="wrapper">
+                    <canvas class="c" id="c_<?php echo $bossRow['id_boss_factory']; ?>"></canvas>
+                </div>
+    <?php
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -180,10 +198,8 @@ include 'db_connect.php';
         echo "User not logged in.";
     }
     ?>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/gh/mrdoob/Three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
 </body>
 
 </html>
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js'></script>
-
-<script src='https://cdn.jsdelivr.net/gh/mrdoob/Three.js@r92/examples/js/loaders/GLTFLoader.js'></script>

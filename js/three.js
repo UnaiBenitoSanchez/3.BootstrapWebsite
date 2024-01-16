@@ -1,44 +1,41 @@
 document.addEventListener('DOMContentLoaded', function () {
     (function () {
-        // Set our main variables
         let scene,
             renderer,
             camera,
-            model,                              // Our character
-            neck,                               // Reference to the neck bone in the skeleton
-            waist,                               // Reference to the waist bone in the skeleton
-            mixer,                              // THREE.js animations mixer
-            idle,                               // Idle, the default state our character returns to
-            clock = new THREE.Clock(),          // Used for anims, which run to a clock instead of frame rate 
+            model,
+            neck,
+            waist,
+            mixer,
+            idle,
+            clock = new THREE.Clock(),
             loaderAnim = document.getElementById('js-loader');
 
         init();
 
         function init() {
-
             const MODEL_PATH = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/stacy_lightweight.glb';
-            const canvas = document.querySelector('#c');
+            const canvas = document.getElementById('c');  // Cambiado a getElementById
+
+            if (!canvas) {
+                console.error("Canvas element not found.");
+                return;
+            }
+
             const backgroundColor = 0xf1f1f1;
 
-            // Init the scene
             scene = new THREE.Scene();
             scene.background = new THREE.Color(backgroundColor);
             scene.fog = new THREE.Fog(backgroundColor, 60, 100);
 
-            // Init the renderer
             renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
             renderer.shadowMap.enabled = true;
             renderer.setPixelRatio(window.devicePixelRatio);
             document.body.appendChild(renderer.domElement);
 
-            // Add a camera
-            camera = new THREE.PerspectiveCamera(
-                50,
-                window.innerWidth / window.innerHeight,
-                0.1,
-                1000
-            );
-            camera.position.z = 30
+
+            camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 30;
             camera.position.x = 0;
             camera.position.y = -3;
 
@@ -65,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             o.receiveShadow = true;
                             o.material = stacy_mtl;
                         }
-                        // Reference the neck and waist bones
                         if (o.isBone && o.name === 'mixamorigNeck') {
                             neck = o;
                         }
@@ -98,16 +94,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     idle = mixer.clipAction(idleAnim);
                     idle.play();
                 },
-                undefined, // We don't need this function
+                undefined,
                 function (error) {
                     console.error(error);
                 }
             );
 
-            // Add lights
             let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.61);
             hemiLight.position.set(0, 50, 0);
-            // Add hemisphere light to scene
             scene.add(hemiLight);
 
             let d = 8.25;
@@ -121,10 +115,8 @@ document.addEventListener('DOMContentLoaded', function () {
             dirLight.shadow.camera.right = d;
             dirLight.shadow.camera.top = d;
             dirLight.shadow.camera.bottom = d * -1;
-            // Add directional Light to scene
             scene.add(dirLight);
 
-            // Floor
             let floorGeometry = new THREE.PlaneGeometry(5000, 5000, 1, 1);
             let floorMaterial = new THREE.MeshPhongMaterial({
                 color: 0xeeeeee,
@@ -146,7 +138,6 @@ document.addEventListener('DOMContentLoaded', function () {
             sphere.position.x = -0.25;
             scene.add(sphere);
 
-            // Ajusta el tamaño del contenedor del personaje
             const canvasContainer = document.querySelector('.wrapper');
             const canvasContainerWidth = 200;
             const canvasContainerHeight = 0;
@@ -207,7 +198,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 var object = intersects[0].object;
 
                 if (object.name === 'stacy') {
-
                     if (!currentlyAnimating) {
                         currentlyAnimating = true;
                         playOnClick();
@@ -269,6 +259,19 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             return { x: dx, y: dy };
         }
+
+        // Nuevas funciones para personalizar la lógica 3D según el jefe específico
+        function customize3DLogic(bossId) {
+            if (bossId === '1') {
+                // Lógica específica para el jefe con bossId 1
+            } else if (bossId === '2') {
+                // Lógica específica para el jefe con bossId 2
+            }
+            // Agrega más condiciones según tus necesidades
+        }
+
+        // Personaliza la lógica 3D según el jefe específico (usando bossId)
+        customize3DLogic(bossId);
 
     })();
 });
