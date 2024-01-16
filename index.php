@@ -64,22 +64,34 @@ include 'db_connect.php';
                     $factoryId = $_POST['factory'];
 
                     $encryptedPassword = textToBrainfuck($password);
-
                     try {
-                        $stmt = $conn->prepare("INSERT INTO boss (name, email, password) VALUES (:fullname, :email, :password)");
-                        $stmt->bindParam(':fullname', $fullname);
-                        $stmt->bindParam(':email', $email);
-                        $stmt->bindParam(':password', $encryptedPassword);
-                        $stmt->execute();
+                        $stmtCount = $conn->prepare("SELECT COUNT(*) as bossCount FROM factory_boss WHERE factory_id_factory = :factoryId");
+                        $stmtCount->bindParam(':factoryId', $factoryId);
+                        $stmtCount->execute();
+                        $resultCount = $stmtCount->fetch(PDO::FETCH_ASSOC);
 
-                        $bossId = $conn->lastInsertId();
+                        if ($resultCount['bossCount'] >= 3) {
+                            echo "<p style='color: white;'>Factory already has 3 bosses. Cannot register more bosses for this factory.</p>";
+                        } else {
+                            try {
+                                $stmt = $conn->prepare("INSERT INTO boss (name, email, password) VALUES (:fullname, :email, :password)");
+                                $stmt->bindParam(':fullname', $fullname);
+                                $stmt->bindParam(':email', $email);
+                                $stmt->bindParam(':password', $encryptedPassword);
+                                $stmt->execute();
 
-                        $stmt = $conn->prepare("INSERT INTO factory_boss (factory_id_factory, boss_id_boss_factory) VALUES (:factoryId, :bossId)");
-                        $stmt->bindParam(':factoryId', $factoryId);
-                        $stmt->bindParam(':bossId', $bossId);
-                        $stmt->execute();
+                                $bossId = $conn->lastInsertId();
 
-                        echo "<p  style='color: white;'>User registered successfully</p>";
+                                $stmt = $conn->prepare("INSERT INTO factory_boss (factory_id_factory, boss_id_boss_factory) VALUES (:factoryId, :bossId)");
+                                $stmt->bindParam(':factoryId', $factoryId);
+                                $stmt->bindParam(':bossId', $bossId);
+                                $stmt->execute();
+
+                                echo "<p  style='color: white;'>User registered successfully</p>";
+                            } catch (PDOException $e) {
+                                echo "Error: " . $e->getMessage();
+                            }
+                        }
                     } catch (PDOException $e) {
                         echo "Error: " . $e->getMessage();
                     }
