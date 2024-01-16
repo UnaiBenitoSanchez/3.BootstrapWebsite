@@ -162,7 +162,7 @@ include 'db_connect.php';
 
                 <div>
                     <div class="wrapper">
-                        <canvas style="width=100px; height=100px;" id="c"></canvas>
+                        <canvas id="c"></canvas>
                     </div>
 
                 </div>
