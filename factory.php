@@ -19,6 +19,10 @@ include 'db_connect.php';
             background-repeat: no-repeat;
         }
     </style>
+
+    <link rel="stylesheet" href="css/three.css">
+
+    <script src="js/three.js"></script>
 </head>
 
 <body>
@@ -155,6 +159,14 @@ include 'db_connect.php';
                     }
                     ?>
                 </div>
+
+                <div>
+                    <div class="wrapper">
+                        <canvas style="width=100px; height=100px;" id="c"></canvas>
+                    </div>
+
+                </div>
+
     <?php
             } else {
                 echo "No factory information found for the current boss.";
@@ -171,3 +183,7 @@ include 'db_connect.php';
 </body>
 
 </html>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js'></script>
+
+<script src='https://cdn.jsdelivr.net/gh/mrdoob/Three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
