@@ -10,8 +10,6 @@ $sql1 = "SELECT boss_id_boss_factory FROM factory_boss
                                     WHERE boss.email = :userEmail
                                 )";
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -207,6 +205,9 @@ $sql1 = "SELECT boss_id_boss_factory FROM factory_boss
         <script src='js/boss1.js'></script>
         <script src='js/boss2.js'></script>
         <script src='js/boss3.js'></script>
+        <script src='js/boss4.js'></script>
+        <script src='js/boss5.js'></script>
+        <script src='js/boss6.js'></script>
     <?php
 
     } else {

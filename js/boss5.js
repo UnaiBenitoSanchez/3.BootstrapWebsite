@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function init() {
             const MODEL_PATH = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/stacy_lightweight.glb';
-            const canvasId = 'c_1';
+            const canvasId = 'c_5';
             const canvas = document.getElementById(canvasId);
 
             if (!canvas) {
