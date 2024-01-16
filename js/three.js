@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Ajusta el tamaño del contenedor del personaje
             const canvasContainer = document.querySelector('.wrapper');
             const canvasContainerWidth = 200;
-            const canvasContainerHeight = 700;
+            const canvasContainerHeight = 0;
 
             canvasContainer.style.width = `${canvasContainerWidth}px`;
             canvasContainer.style.height = `${canvasContainerHeight}px`;
