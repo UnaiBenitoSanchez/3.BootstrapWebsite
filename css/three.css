@@ -2,32 +2,29 @@ body,
 html {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
-* {
-    touch-action: manipulation;
-}
-
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
+.boss-container {
+    justify-content: center;
+    align-items: center;
 }
 
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 0px;
+    width: 20%;
+    margin: 10px;
 }
 
 .c {
-    width: 40%;
+    width: 20%;
     height: 600px;
-    margin-left: 30%;
 }
-
+#c_4{
+    margin-left: 40%;
+}
+#c_6{
+    margin-left: -60%;
+}
 
 @keyframes flip {
     0% {
@@ -44,9 +41,7 @@ html {
 }
 
 @media (max-width: 768px) {
-    #c {
+    .wrapper {
         width: 75%;
-        height: 600px;
-        margin-left: 12.5%;
     }
 }
