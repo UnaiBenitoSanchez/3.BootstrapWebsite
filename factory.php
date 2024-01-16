@@ -160,14 +160,12 @@ include 'db_connect.php';
                     ?>
                 </div>
 
-
                 <div class="container mt-5">
                     <h2 style="color: white">Bosses:</h2>
                     <div class="wrapper">
                         <canvas id="c"></canvas>
                     </div>
                 </div>
-
 
     <?php
             } else {
