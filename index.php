@@ -21,11 +21,11 @@ include 'db_connect.php';
     <div class="container">
 
         <div class="signup-section">
-            <header>Signup</header>
+            <header style="margin-bottom: -40px">Signup</header>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" style="margin-top: 90px;">
                 <input type="text" name="fullname" placeholder="Full name">
                 <input type="email" name="email" placeholder="Email address">
-                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="password" id="password" placeholder="Password">
 
                 <label for="factory" style="color: white;">Select your factory:</label>
                 <select name="factory" id="factory">
