@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-require_once 'db_connect.php';
+require_once '../db_connect.php';
 
 // Check if the 'id_product' parameter is set in the POST request
 if (isset($_POST['id_product'])) {

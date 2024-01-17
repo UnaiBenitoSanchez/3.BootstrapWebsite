@@ -1,5 +1,5 @@
 <?php
-include 'db_connect.php';
+include '../db_connect.php';
 session_start();
 ?>
 
@@ -8,13 +8,13 @@ session_start();
 
 <head>
 
-    <?php include './controller/head.php'; ?>
+    <?php include '../controller/head.php'; ?>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
 
     <!-- JS -->
-    <script src="js/dashboard.js"></script>
+    <script src="../js/dashboard.js"></script>
 
     <!-- Title -->
     <title>Inventory Management Dashboard - Products</title>
@@ -34,7 +34,7 @@ session_start();
     </style>
     <style>
         body {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/factory.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/factory.jpg');
             background-size: cover;
             background-attachment: fixed;
             background-repeat: no-repeat;
@@ -45,7 +45,7 @@ session_start();
 
 <body>
 
-    <?php include './controller/navbar.php'; ?>
+    <?php include '../controller/navbar.php'; ?>
 
     <div class="container mt-4 mb-5 col-lg-10">
         <div class="row" id="products-container">

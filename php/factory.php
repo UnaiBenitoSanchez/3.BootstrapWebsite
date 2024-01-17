@@ -1,5 +1,5 @@
 <?php
-include 'db_connect.php';
+include '../db_connect.php';
 
 
 $sql1 = "SELECT boss_id_boss_factory FROM factory_boss 
@@ -16,14 +16,14 @@ $sql1 = "SELECT boss_id_boss_factory FROM factory_boss
 <html lang="en">
 
 <head>
-    <?php include './controller/head.php'; ?>
+    <?php include '../controller/head.php'; ?>
     <!-- title -->
     <title>Inventory Management Dashboard - Factory</title>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         body {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/factory.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/factory.jpg');
             background-size: cover;
             background-attachment: fixed;
             background-repeat: no-repeat;
@@ -34,12 +34,12 @@ $sql1 = "SELECT boss_id_boss_factory FROM factory_boss
         }
     </style>
 
-    <link rel="stylesheet" href="css/three.css">
+    <link rel="stylesheet" href="../css/three.css">
 
 </head>
 
 <body>
-    <?php include './controller/navbar.php'; ?>
+    <?php include '../controller/navbar.php'; ?>
 
     <?php
     session_start();
@@ -202,18 +202,18 @@ $sql1 = "SELECT boss_id_boss_factory FROM factory_boss
 
         ?>
 
-        <script src='js/boss1.js'></script>
-        <script src='js/boss2.js'></script>
-        <script src='js/boss3.js'></script>
-        <script src='js/boss4.js'></script>
-        <script src='js/boss5.js'></script>
-        <script src='js/boss6.js'></script>
-        <script src='js/boss7.js'></script>
-        <script src='js/boss8.js'></script>
-        <script src='js/boss9.js'></script>
-        <script src='js/boss10.js'></script>
-        <script src='js/boss11.js'></script>
-        <script src='js/boss12.js'></script>
+        <script src='../js/boss1.js'></script>
+        <script src='../js/boss2.js'></script>
+        <script src='../js/boss3.js'></script>
+        <script src='../js/boss4.js'></script>
+        <script src='../js/boss5.js'></script>
+        <script src='../js/boss6.js'></script>
+        <script src='../js/boss7.js'></script>
+        <script src='../js/boss8.js'></script>
+        <script src='../js/boss9.js'></script>
+        <script src='../js/boss10.js'></script>
+        <script src='../js/boss11.js'></script>
+        <script src='../js/boss12.js'></script>
 
     <?php
 

@@ -1,5 +1,5 @@
 <?php
-include 'db_connect.php';
+include '../db_connect.php';
 session_start();
 
 function getFactoryNameByBoss($bossEmail)
@@ -31,7 +31,7 @@ $factoryName = getFactoryNameByBoss($bossEmail);
 <html lang="en">
 
 <head>
-  <?php include './controller/head.php'; ?>
+  <?php include '../controller/head.php'; ?>
 
   <!-- title -->
   <title>Inventory management dashboard</title>
@@ -39,7 +39,7 @@ $factoryName = getFactoryNameByBoss($bossEmail);
   <!-- css -->
   <style>
     body {
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/factory.jpg');
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/factory.jpg');
       background-size: cover;
       background-attachment: fixed;
       background-repeat: no-repeat;
@@ -78,7 +78,7 @@ $factoryName = getFactoryNameByBoss($bossEmail);
 </head>
 
 <body>
-  <?php include './controller/navbar.php'; ?>
+  <?php include '../controller/navbar.php'; ?>
 
   <?php
   // Common function to draw charts
@@ -168,21 +168,21 @@ $factoryName = getFactoryNameByBoss($bossEmail);
       <br>
       <div style="justify-content: center; display: flex; flex-wrap: wrap;">
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-          <img src="img/mattel4.jpg" class="card-img-top" alt="...">
+          <img src="../img/mattel4.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Barbie Cutie Reveal Serie Phantasy Unicorn</h5>
             <p class="card-text">Open the box and you'll see inside a soft plush unicorn and four surprise bags. Remove the rainbow unicorn costume and you'll find a Barbie doll with long hair and sparkly details. Open the surprise bags and discover sparkly clothes, accessories, a sponge-comb and a mini unicorn.</p>
           </div>
         </div>
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-          <img src="img/mattel5.jpg" class="card-img-top" alt="...">
+          <img src="../img/mattel5.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Barbie Cutie Reveal Serie Jungle Friends Tiger</h5>
             <p class="card-text">Barbie Cutie Reveal Jungle Series dolls offer the cutest unboxing experience with 10 surprises! Discover a charming Elephant, lovable Tiger, bright Toucan or cheeky Monkey, then remove the plush costume to reveal a posable Barbie doll with long, colorful hair. Which doll will you reveal?</p>
           </div>
         </div>
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-          <img src="img/mattel6.jpg" class="card-img-top" alt="...">
+          <img src="../img/mattel6.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Disney Frozen Queen Anna & Elsa Snow Queen</h5>
             <p class="card-text">Set of two classic dolls, Queen Anna and Snow Queen Elsa. Finely detailed features; Elsa snow queen costume includes satin dress with shimmering lavender organza cape and sleeves. Queen Anna costume includes layered green satin dress with glitter, lined cape and tiara. Beautifully styled, rooted hair; molded shoes and boots</p>
@@ -203,21 +203,21 @@ $factoryName = getFactoryNameByBoss($bossEmail);
       <br>
       <div style="justify-content: center; display: flex; flex-wrap: wrap;">
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-          <img src="img/lego4.jpg" class="card-img-top" alt="...">
+          <img src="../img/lego4.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Cherry Blossoms</h5>
             <p class="card-text">As well as being a celebration gift for kids, the brick-built blossoms make a great gift for grown-ups, who will be delighted to receive these unique flowers onValentine’s Day or Mother’s Day. Once complete, the set makes a beautiful piece of floral decor that will add a touch of spring joy to any space. It can also be combined with other LEGO flowers (sold separately) to create a vibrant bouquet.</p>
           </div>
         </div>
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-          <img src="img/lego5.jpg" class="card-img-top" alt="...">
+          <img src="../img/lego5.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Disney Ariel Mini Castle</h5>
             <p class="card-text">Fans of Disney Princess buildable toys and The Little Mermaid movie aged 12 and up will enjoy endless imaginative role play with this mini model of Ariel’s enchanting palace. Mini Disney Ariel’s Castle (40708) is covered in golden details, incorporates various underwater features and includes an Ariel mini-doll figure. This portable buildable playset is part of the Mini Disney range of companion construction toys, sold separately.</p>
           </div>
         </div>
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-          <img src="img/lego6.jpg" class="card-img-top" alt="...">
+          <img src="../img/lego6.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Ideas International Space Station</h5>
             <p class="card-text">Challenge your construction skills and evoke nostalgia with this LEGO Ideas International Space Station. A set developed in collaboration with NASA, this space station building kit includes a toy shuttle, three mini cargo spacecraft, and two astronaut figures to create a spectacular display and rekindle nostalgic memories of childhood LEGO projects.</p>
@@ -238,21 +238,21 @@ $factoryName = getFactoryNameByBoss($bossEmail);
       <br>
       <div style="justify-content: center; display: flex; flex-wrap: wrap;">
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-          <img src="img/nerf4.jpg" class="card-img-top" alt="...">
+          <img src="../img/nerf4.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Nerf N-Strike Elite Disruptor Blaster</h5>
             <p class="card-text">This quick-draw blaster has a rotating drum that holds up to 6 Elite darts. Choose your target and fire 1 dart at a time, or unleash all 6 darts in rapid succession with slam-fire action. To prime the blaster, pull the slide back and release. Check the indicator; if it’s orange, the blaster is primed and ready to fire. The The Nerf N-Strike Elite Disruptor fires darts up to 90 feet (27 meters).</p>
           </div>
         </div>
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-          <img src="img/nerf5.jpg" class="card-img-top" alt="...">
+          <img src="../img/nerf5.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Nerf Rival Phantom Corps Kronos XVIII-500</h5>
             <p class="card-text">Phantom Corps is a group of rogue specialists who may join Team Red or Team Blue today, then challenge them tomorrow. Nerf Rival battles will never be the same! Go into battle as a member of the Phantom Corps team with the breech-loading Kronos XVIII-500 blaster that features the team’s identifying color and logo.</p>
           </div>
         </div>
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-          <img src="img/nerf6.jpg" class="card-img-top" alt="...">
+          <img src="../img/nerf6.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Nerf N-Strike Elite Rhino-Fire Blaster</h5>
             <p class="card-text">Dominate any battlefield with the double-barrel assault of the Nerf N-Strike Elite Rhino-Fire blaster! You can launch a blizzard of darts at targets up to 90 feet away from the blaster’s two barrels, and its two drums hold 25 darts each. Remove the tripod when you’re on the move or attach it to steady your shots when you’re firing from a secure location. You'll overwhelm the competition with the motorized, rapid-fire speed of the Rhino-Fire blaster!</p>
@@ -273,21 +273,21 @@ $factoryName = getFactoryNameByBoss($bossEmail);
       <br>
       <div style="justify-content: center; display: flex; flex-wrap: wrap;">
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-          <img src="img/playtime4.jpg" class="card-img-top" alt="...">
+          <img src="../img/playtime4.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">DogDay</h5>
             <p class="card-text">This is DogDay, the sunny, strong, and determined leader of our critters! Each trusts him to find the bright side in any situation, and to have a friendly word of encouragement should they feel down. He'll always keep his friends going, no matter what.</p>
           </div>
         </div>
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-          <img src="img/playtime8.jpg" class="card-img-top" alt="...">
+          <img src="../img/playtime8.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">CatNap</h5>
             <p class="card-text">CatNap is a calming presence for the critters and ensures he and his friends always have the right amount of sleep to jumpstart the morning's play! End of the day, there's nothing CatNap enjoys more than watching his friends sleep soundly.</p>
           </div>
         </div>
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-left: 10px;">
-          <img src="img/playtime2.jpg" class="card-img-top" alt="...">
+          <img src="../img/playtime2.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Bubba Bubbaphant</h5>
             <p class="card-text">Bubba Bubbaphant is the brains of the critters. Bright and attentive, he keeps his friends steady and always steers them to make smart choices, that way they all might grow up to be bright and brilliant, each in their own right.</p>

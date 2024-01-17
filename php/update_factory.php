@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include 'db_connect.php';
+include '../db_connect.php';
 
 // Check if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

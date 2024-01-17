@@ -1,5 +1,5 @@
 <?php
-require_once 'db_connect.php';
+require_once '../db_connect.php';
 
 // Retrieve data from the POST request
 $idProduct = $_POST['id_product'];

@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <?php include './controller/head.php'; ?>
+    <?php include '../controller/head.php'; ?>
 
     <style>
         body {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/factory.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/factory.jpg');
             background-size: cover;
             background-attachment: fixed;
             background-repeat: no-repeat;
@@ -16,7 +16,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <?php
-    include 'db_connect.php';
+    include '../db_connect.php';
     session_start();
 
     $user_email = $_SESSION['user_email'];
@@ -101,7 +101,7 @@
 </head>
 
 <body>
-    <?php include './controller/navbar.php'; ?>
+    <?php include '../controller/navbar.php'; ?>
 
     <div class="container-fluid mt-4 col-lg-10">
         <div class="row">

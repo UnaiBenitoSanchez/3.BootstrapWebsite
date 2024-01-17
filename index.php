@@ -244,7 +244,7 @@ include 'db_connect.php';
                             if ($encryptedPasswordInput == $user['password']) {
                                 session_start();
                                 $_SESSION['user_email'] = $email;
-                                echo '<script>window.location.href = "landing_page.php";</script>';
+                                echo '<script>window.location.href = "./php/landing_page.php";</script>';
                                 exit();
                             } else {
                                 echo "Incorrect password";
