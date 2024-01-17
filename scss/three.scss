@@ -1,0 +1,55 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.boss-container {
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    width: 20%;
+    margin: 10px;
+
+    .c {
+        width: 20%;
+        height: 600px;
+
+        #c_1,
+        #c_2,
+        #c_3,
+        #c_4 {
+            margin-left: 40%;
+        }
+
+        #c_6,
+        #c_8,
+        #c_10,
+        #c_12 {
+            margin-left: -60%;
+        }
+
+        @keyframes flip {
+            0% {
+                transform: rotate(0);
+            }
+
+            50% {
+                transform: rotateY(180deg);
+            }
+
+            100% {
+                transform: rotateY(180deg) rotateX(180deg);
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        width: 75%;
+    }
+}
