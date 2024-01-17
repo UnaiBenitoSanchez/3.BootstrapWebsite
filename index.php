@@ -64,137 +64,141 @@ include 'db_connect.php';
                     $factoryId = $_POST['factory'];
                     $encryptedPassword = textToBrainfuck($password);
 
-                    if ($factoryId == "1") {
-                        try {
-                            $desiredMattelId = 5;
+                    if (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/', $password)) {
+                        echo "<p style='color: #ffffff'>Password must contain at least one letter, one number, and be at least 8 characters long.</p>";
+                    } else {
+                        if ($factoryId == "1") {
+                            try {
+                                $desiredMattelId = 5;
 
-                            $stmtCheckMattelId = $conn->prepare("SELECT COUNT(*) as MattelCount FROM factory_boss WHERE boss_id_boss_factory = :desiredMattelId");
-                            $stmtCheckMattelId->bindParam(':desiredMattelId',  $desiredMattelId);
-                            $stmtCheckMattelId->execute();
-                            $resultCheckMattelId = $stmtCheckMattelId->fetch(PDO::FETCH_ASSOC);
+                                $stmtCheckMattelId = $conn->prepare("SELECT COUNT(*) as MattelCount FROM factory_boss WHERE boss_id_boss_factory = :desiredMattelId");
+                                $stmtCheckMattelId->bindParam(':desiredMattelId',  $desiredMattelId);
+                                $stmtCheckMattelId->execute();
+                                $resultCheckMattelId = $stmtCheckMattelId->fetch(PDO::FETCH_ASSOC);
 
-                            $newMattelId = $resultCheckMattelId['MattelCount'] > 0 ?  $desiredMattelId + 1 :  $desiredMattelId;
+                                $newMattelId = $resultCheckMattelId['MattelCount'] > 0 ?  $desiredMattelId + 1 :  $desiredMattelId;
 
-                            $stmt = $conn->prepare("INSERT INTO boss (id_boss_factory, name, email, password) VALUES (:id, :fullname, :email, :password)");
-                            $stmt->bindParam(':id', $newMattelId);
-                            $stmt->bindParam(':fullname', $fullname);
-                            $stmt->bindParam(':email', $email);
-                            $stmt->bindParam(':password', $encryptedPassword);
-                            $stmt->execute();
+                                $stmt = $conn->prepare("INSERT INTO boss (id_boss_factory, name, email, password) VALUES (:id, :fullname, :email, :password)");
+                                $stmt->bindParam(':id', $newMattelId);
+                                $stmt->bindParam(':fullname', $fullname);
+                                $stmt->bindParam(':email', $email);
+                                $stmt->bindParam(':password', $encryptedPassword);
+                                $stmt->execute();
 
-                            $bossId = $conn->lastInsertId();
-                            if (!$bossId) {
-                                echo "Error: Boss insertion failed.";
-                                exit();
+                                $bossId = $conn->lastInsertId();
+                                if (!$bossId) {
+                                    echo "Error: Boss insertion failed.";
+                                    exit();
+                                }
+
+                                $stmt = $conn->prepare("INSERT INTO factory_boss (factory_id_factory, boss_id_boss_factory) VALUES (:factoryId, :bossId)");
+                                $stmt->bindParam(':factoryId', $factoryId);
+                                $stmt->bindParam(':bossId', $newMattelId);
+                                $stmt->execute();
+
+                                echo "<p style='color: white;'>User registered successfully</p>";
+                            } catch (PDOException $e) {
+                                echo "<p style='color: #ffffff'>Please fill in all fields, including the factory.<p>";
                             }
+                        } else if ($factoryId == "2") {
+                            try {
+                                $desiredLegoId = 7;
 
-                            $stmt = $conn->prepare("INSERT INTO factory_boss (factory_id_factory, boss_id_boss_factory) VALUES (:factoryId, :bossId)");
-                            $stmt->bindParam(':factoryId', $factoryId);
-                            $stmt->bindParam(':bossId', $newMattelId);
-                            $stmt->execute();
+                                $stmtCheckLegoId = $conn->prepare("SELECT COUNT(*) as legoCount FROM factory_boss WHERE boss_id_boss_factory = :desiredLegoId");
+                                $stmtCheckLegoId->bindParam(':desiredLegoId', $desiredLegoId);
+                                $stmtCheckLegoId->execute();
+                                $resultCheckLegoId = $stmtCheckLegoId->fetch(PDO::FETCH_ASSOC);
 
-                            echo "<p style='color: white;'>User registered successfully</p>";
-                        } catch (PDOException $e) {
-                            echo "<p style='color: #ffffff'>Please fill in all fields, including the factory.<p>";
-                        }
-                    } else if ($factoryId == "2") {
-                        try {
-                            $desiredLegoId = 7;
+                                $newLegoId = $resultCheckLegoId['legoCount'] > 0 ? $desiredLegoId + 1 : $desiredLegoId;
 
-                            $stmtCheckLegoId = $conn->prepare("SELECT COUNT(*) as legoCount FROM factory_boss WHERE boss_id_boss_factory = :desiredLegoId");
-                            $stmtCheckLegoId->bindParam(':desiredLegoId', $desiredLegoId);
-                            $stmtCheckLegoId->execute();
-                            $resultCheckLegoId = $stmtCheckLegoId->fetch(PDO::FETCH_ASSOC);
+                                $stmt = $conn->prepare("INSERT INTO boss (id_boss_factory, name, email, password) VALUES (:id, :fullname, :email, :password)");
+                                $stmt->bindParam(':id', $newLegoId);
+                                $stmt->bindParam(':fullname', $fullname);
+                                $stmt->bindParam(':email', $email);
+                                $stmt->bindParam(':password', $encryptedPassword);
+                                $stmt->execute();
 
-                            $newLegoId = $resultCheckLegoId['legoCount'] > 0 ? $desiredLegoId + 1 : $desiredLegoId;
+                                $bossId = $conn->lastInsertId();
+                                if (!$bossId) {
+                                    echo "Error: Boss insertion failed.";
+                                    exit();
+                                }
 
-                            $stmt = $conn->prepare("INSERT INTO boss (id_boss_factory, name, email, password) VALUES (:id, :fullname, :email, :password)");
-                            $stmt->bindParam(':id', $newLegoId);
-                            $stmt->bindParam(':fullname', $fullname);
-                            $stmt->bindParam(':email', $email);
-                            $stmt->bindParam(':password', $encryptedPassword);
-                            $stmt->execute();
+                                $stmt = $conn->prepare("INSERT INTO factory_boss (factory_id_factory, boss_id_boss_factory) VALUES (:factoryId, :bossId)");
+                                $stmt->bindParam(':factoryId', $factoryId);
+                                $stmt->bindParam(':bossId', $newLegoId);
+                                $stmt->execute();
 
-                            $bossId = $conn->lastInsertId();
-                            if (!$bossId) {
-                                echo "Error: Boss insertion failed.";
-                                exit();
+                                echo "<p style='color: white;'>User registered successfully</p>";
+                            } catch (PDOException $e) {
+                                echo "<p style='color: #ffffff'>Please fill in all fields, including the factory.<p>";
                             }
+                        } else if ($factoryId == "3") {
+                            try {
+                                $desiredNerfId = 9;
 
-                            $stmt = $conn->prepare("INSERT INTO factory_boss (factory_id_factory, boss_id_boss_factory) VALUES (:factoryId, :bossId)");
-                            $stmt->bindParam(':factoryId', $factoryId);
-                            $stmt->bindParam(':bossId', $newLegoId);
-                            $stmt->execute();
+                                $stmtCheckNerfId = $conn->prepare("SELECT COUNT(*) as NerfCount FROM factory_boss WHERE boss_id_boss_factory = :desiredNerfId");
+                                $stmtCheckNerfId->bindParam(':desiredNerfId', $desiredNerfId);
+                                $stmtCheckNerfId->execute();
+                                $resultCheckNerfId = $stmtCheckNerfId->fetch(PDO::FETCH_ASSOC);
 
-                            echo "<p style='color: white;'>User registered successfully</p>";
-                        } catch (PDOException $e) {
-                            echo "<p style='color: #ffffff'>Please fill in all fields, including the factory.<p>";
-                        }
-                    } else if ($factoryId == "3") {
-                        try {
-                            $desiredNerfId = 9;
+                                $newNerfId = $resultCheckNerfId['NerfCount'] > 0 ? $desiredNerfId + 1 : $desiredNerfId;
 
-                            $stmtCheckNerfId = $conn->prepare("SELECT COUNT(*) as NerfCount FROM factory_boss WHERE boss_id_boss_factory = :desiredNerfId");
-                            $stmtCheckNerfId->bindParam(':desiredNerfId', $desiredNerfId);
-                            $stmtCheckNerfId->execute();
-                            $resultCheckNerfId = $stmtCheckNerfId->fetch(PDO::FETCH_ASSOC);
+                                $stmt = $conn->prepare("INSERT INTO boss (id_boss_factory, name, email, password) VALUES (:id, :fullname, :email, :password)");
+                                $stmt->bindParam(':id', $newNerfId);
+                                $stmt->bindParam(':fullname', $fullname);
+                                $stmt->bindParam(':email', $email);
+                                $stmt->bindParam(':password', $encryptedPassword);
+                                $stmt->execute();
 
-                            $newNerfId = $resultCheckNerfId['NerfCount'] > 0 ? $desiredNerfId + 1 : $desiredNerfId;
+                                $bossId = $conn->lastInsertId();
+                                if (!$bossId) {
+                                    echo "Error: Boss insertion failed.";
+                                    exit();
+                                }
 
-                            $stmt = $conn->prepare("INSERT INTO boss (id_boss_factory, name, email, password) VALUES (:id, :fullname, :email, :password)");
-                            $stmt->bindParam(':id', $newNerfId);
-                            $stmt->bindParam(':fullname', $fullname);
-                            $stmt->bindParam(':email', $email);
-                            $stmt->bindParam(':password', $encryptedPassword);
-                            $stmt->execute();
+                                $stmt = $conn->prepare("INSERT INTO factory_boss (factory_id_factory, boss_id_boss_factory) VALUES (:factoryId, :bossId)");
+                                $stmt->bindParam(':factoryId', $factoryId);
+                                $stmt->bindParam(':bossId', $newNerfId);
+                                $stmt->execute();
 
-                            $bossId = $conn->lastInsertId();
-                            if (!$bossId) {
-                                echo "Error: Boss insertion failed.";
-                                exit();
+                                echo "<p style='color: white;'>User registered successfully</p>";
+                            } catch (PDOException $e) {
+                                echo "<p style='color: #ffffff'>Please fill in all fields, including the factory.<p>";
                             }
+                        } else if ($factoryId == "4") {
+                            try {
+                                $desiredPlaytimeId = 11;
 
-                            $stmt = $conn->prepare("INSERT INTO factory_boss (factory_id_factory, boss_id_boss_factory) VALUES (:factoryId, :bossId)");
-                            $stmt->bindParam(':factoryId', $factoryId);
-                            $stmt->bindParam(':bossId', $newNerfId);
-                            $stmt->execute();
+                                $stmtCheckPlaytimeId = $conn->prepare("SELECT COUNT(*) as PlaytimeCount FROM factory_boss WHERE boss_id_boss_factory = :desiredPlaytimeId");
+                                $stmtCheckPlaytimeId->bindParam(':desiredPlaytimeId', $desiredPlaytimeId);
+                                $stmtCheckPlaytimeId->execute();
+                                $resultCheckPlaytimeId = $stmtCheckPlaytimeId->fetch(PDO::FETCH_ASSOC);
 
-                            echo "<p style='color: white;'>User registered successfully</p>";
-                        } catch (PDOException $e) {
-                            echo "<p style='color: #ffffff'>Please fill in all fields, including the factory.<p>";
-                        }
-                    } else if ($factoryId == "4") {
-                        try {
-                            $desiredPlaytimeId = 11;
+                                $newPlaytimeId = $resultCheckPlaytimeId['PlaytimeCount'] > 0 ? $desiredPlaytimeId + 1 : $desiredPlaytimeId;
 
-                            $stmtCheckPlaytimeId = $conn->prepare("SELECT COUNT(*) as PlaytimeCount FROM factory_boss WHERE boss_id_boss_factory = :desiredPlaytimeId");
-                            $stmtCheckPlaytimeId->bindParam(':desiredPlaytimeId', $desiredPlaytimeId);
-                            $stmtCheckPlaytimeId->execute();
-                            $resultCheckPlaytimeId = $stmtCheckPlaytimeId->fetch(PDO::FETCH_ASSOC);
+                                $stmt = $conn->prepare("INSERT INTO boss (id_boss_factory, name, email, password) VALUES (:id, :fullname, :email, :password)");
+                                $stmt->bindParam(':id', $newPlaytimeId);
+                                $stmt->bindParam(':fullname', $fullname);
+                                $stmt->bindParam(':email', $email);
+                                $stmt->bindParam(':password', $encryptedPassword);
+                                $stmt->execute();
 
-                            $newPlaytimeId = $resultCheckPlaytimeId['PlaytimeCount'] > 0 ? $desiredPlaytimeId + 1 : $desiredPlaytimeId;
+                                $bossId = $conn->lastInsertId();
+                                if (!$bossId) {
+                                    echo "Error: Boss insertion failed.";
+                                    exit();
+                                }
 
-                            $stmt = $conn->prepare("INSERT INTO boss (id_boss_factory, name, email, password) VALUES (:id, :fullname, :email, :password)");
-                            $stmt->bindParam(':id', $newPlaytimeId);
-                            $stmt->bindParam(':fullname', $fullname);
-                            $stmt->bindParam(':email', $email);
-                            $stmt->bindParam(':password', $encryptedPassword);
-                            $stmt->execute();
+                                $stmt = $conn->prepare("INSERT INTO factory_boss (factory_id_factory, boss_id_boss_factory) VALUES (:factoryId, :bossId)");
+                                $stmt->bindParam(':factoryId', $factoryId);
+                                $stmt->bindParam(':bossId', $newPlaytimeId);
+                                $stmt->execute();
 
-                            $bossId = $conn->lastInsertId();
-                            if (!$bossId) {
-                                echo "Error: Boss insertion failed.";
-                                exit();
+                                echo "<p style='color: white;'>User registered successfully</p>";
+                            } catch (PDOException $e) {
+                                echo "<p style='color: #ffffff'>Please fill in all fields, including the factory.<p>";
                             }
-
-                            $stmt = $conn->prepare("INSERT INTO factory_boss (factory_id_factory, boss_id_boss_factory) VALUES (:factoryId, :bossId)");
-                            $stmt->bindParam(':factoryId', $factoryId);
-                            $stmt->bindParam(':bossId', $newPlaytimeId);
-                            $stmt->execute();
-
-                            echo "<p style='color: white;'>User registered successfully</p>";
-                        } catch (PDOException $e) {
-                            echo "<p style='color: #ffffff'>Please fill in all fields, including the factory.<p>";
                         }
                     }
                 }
