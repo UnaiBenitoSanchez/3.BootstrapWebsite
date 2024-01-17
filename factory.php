@@ -208,6 +208,13 @@ $sql1 = "SELECT boss_id_boss_factory FROM factory_boss
         <script src='js/boss4.js'></script>
         <script src='js/boss5.js'></script>
         <script src='js/boss6.js'></script>
+        <script src='js/boss7.js'></script>
+        <script src='js/boss8.js'></script>
+        <script src='js/boss9.js'></script>
+        <script src='js/boss10.js'></script>
+        <script src='js/boss11.js'></script>
+        <script src='js/boss12.js'></script>
+
     <?php
 
     } else {
