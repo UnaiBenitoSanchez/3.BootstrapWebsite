@@ -39,7 +39,7 @@ $factoryName = getFactoryNameByBoss($bossEmail);
   <?php include '../controller/head.php'; ?>
 
   <!-- title -->
-  <title>Inventory management dashboard</title>
+  <title>Inventory management dashboard Landing Page</title>
 
   <!-- css -->
   <style>

@@ -97,7 +97,7 @@
     </script>
 
     <!-- title -->
-    <title>Inventory management dashboard</title>
+    <title>Inventory management dashboard - Graphics</title>
 </head>
 
 <body>
