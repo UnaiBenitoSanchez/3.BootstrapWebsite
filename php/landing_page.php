@@ -92,7 +92,7 @@ $factoryName = getFactoryNameByBoss($bossEmail);
   echo 'var options = {';
   echo 'chart: {';
   echo 'title: chartTitle,';
-  echo 'subtitle: \'per month than other companies\',';
+  echo 'subtitle: \'per month compared with other companies\',';
   echo '},';
   echo 'backgroundColor: {';
   echo 'fill: \'transparent\'';
