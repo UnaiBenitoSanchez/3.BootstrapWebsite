@@ -53,7 +53,7 @@ $factoryName = getFactoryNameByBoss($bossEmail);
 
     .container {
       width: 90%;
-      max-width: 900px;
+      max-width: 850px;
       margin: 20px auto;
       background: transparent;
       border: 2px solid rgba(255, 255, 255, 0.5);
@@ -66,7 +66,7 @@ $factoryName = getFactoryNameByBoss($bossEmail);
 
     @media (max-width: 768px) {
       .container {
-        width: 100%;
+        width: 90%;
       }
     }
   </style>
