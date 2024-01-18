@@ -25,7 +25,7 @@ session_start();
             max-height: 50px;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
-            border-radius: 15px; 
+            border-radius: 15px 15px 0 0;
         }
 
         #addProductFooter.expanded {
@@ -53,10 +53,12 @@ session_start();
         </div>
     </div>
 
-    <footer class="bg-body-tertiary text-center text-lg-start fixed-bottom" id="addProductFooter">
-        <div class="container mt-4">
-        <div id="footerIndicator" class="footer-indicator"></div>
-            <center><h5>Add New Product</h5></center>
+    <footer class="bg-body-tertiary text-center text-lg-start fixed-bottom" id="addProductFooter" style=" box-shadow: inset 0px 10px 4px 0 rgba(20, 20, 20, 0.2);">
+        <div class="container mt-3">
+            <div id="footerIndicator" class="footer-indicator"></div>
+            <center>
+                <h5>Add New Product</h5>
+            </center>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="product_name" class="form-label">Product Name</label>
@@ -152,7 +154,7 @@ session_start();
                 
                   END;
                 ";
-                
+
             $stmt = $conn->prepare($addEventSQL);
             $stmt->execute();
         } catch (PDOException $e) {
