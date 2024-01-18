@@ -1,4 +1,5 @@
 <style>
+
     .navbar{
         background-color: #2596be;
         opacity: 0.9;
