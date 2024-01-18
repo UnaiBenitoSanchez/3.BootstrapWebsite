@@ -191,17 +191,22 @@ INSERT INTO factory VALUES ('2','Lego','456 Oak St','Houston','Texas','USA','600
 INSERT INTO factory_boss VALUES ('2','2');
 INSERT INTO product VALUES('7','Millennium Falcon','Packed with authentic details! Highly realistic detailing makes this an impressive display item. Relive the Star Wars™ saga.
 Includes two crews, so you can recreate both classic and new movies.','849.99','img/Millennium_Falcon.jpg','1');
-INSERT INTO inventory VALUES('7','1200','2024-01-03','7','2');
+INSERT INTO inventory VALUES('7','1200','2024-01-03','7','2'),
+('8','2300','2024-01-03','8','2'),
+('9','1100','2024-01-03','9','2'),
+('10','1200','2024-01-03','10','2'),
+('11','2300','2024-01-03','11','2'),
+('12','1100','2024-01-03','12','2');
 INSERT INTO product VALUES('8','Orient Express Train','A paragon of French luxury and an engineering marvel for railroad enthusiasts around the world, the Orient-Express has been stirring imaginations for over 140 years. This new LEGO® Ideas set features interpretations of the train\'s most perfected details along with 8 new character minifigures - it\'s your ticket to endless play and display possibilities!','299.99','img/lego2.jpg','1');
-INSERT INTO inventory VALUES('8','2300','2024-01-03','8','2');
+
 INSERT INTO product VALUES('9','Avengers Tower','Recreate the colossal style and grand scale of the Avengers universe\'s most iconic building with the 5201-piece Avengers Tower set. Standing approximately 90 cm tall, this monumental set is more than just a spectacular display piece. It includes a stellar cast of 31 figures that allows you to recreate the battles of the Infinity saga in a multitude of different ways.','499.00','img/lego3.jpg','1');
-INSERT INTO inventory VALUES('9','1100','2024-01-03','9','2');
+
 INSERT INTO product VALUES('10','Cherry Blossoms','As well as being a celebration gift for kids, the brick-built blossoms make a great gift for grown-ups, who will be delighted to receive these unique flowers onValentine’s Day or Mother’s Day. Once complete, the set makes a beautiful piece of floral decor that will add a touch of spring joy to any space. It can also be combined with other LEGO flowers (sold separately) to create a vibrant bouquet.','14.99','img/lego4.jpg','1');
-INSERT INTO inventory VALUES('10','1200','2024-01-03','10','2');
+
 INSERT INTO product VALUES('11','Disney Ariel Mini Castle','Fans of Disney Princess buildable toys and The Little Mermaid movie aged 12 and up will enjoy endless imaginative role play with this mini model of Ariel’s enchanting palace. Mini Disney Ariel’s Castle (40708) is covered in golden details, incorporates various underwater features and includes an Ariel mini-doll figure. This portable buildable playset is part of the Mini Disney range of companion construction toys, sold separately.','39.99','img/lego5.jpg','1');
-INSERT INTO inventory VALUES('11','2300','2024-01-03','11','2');
+
 INSERT INTO product VALUES('12','Natural History Museum','Discover the first-ever museum to join the Modular Buildings collection. Home to an array of brick-built exhibits it features dual skylights that allow light to permeate the building’s 2 levels, illuminating the towering brachiosaurus skeleton and collection of treasures within.','299.99','img/lego6.jpg','1');
-INSERT INTO inventory VALUES('12','1100','2024-01-03','12','2');
+
 
 -- Nerf
 INSERT INTO boss VALUES ('3','Reyn Guyer','r3yn@gmail.com','++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++++.>');
