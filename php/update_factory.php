@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $editedEmployeeCount = $_POST['editedEmployeeCount'];
 
         // Prepare and execute the database update query
-        $updateSql = "UPDATE factory SET name = :employee_count = :editedEmployeeCount WHERE id_factory = :factoryId";
+        $updateSql = "UPDATE factory SET employee_count = :editedEmployeeCount WHERE id_factory = :factoryId";
         $updateStmt = $conn->prepare($updateSql);
         $updateStmt->bindParam(':factoryId', $factoryId);
         $updateStmt->bindParam(':editedEmployeeCount', $editedEmployeeCount);
@@ -26,3 +26,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn = null;
     }
 }
+?>

@@ -79,7 +79,7 @@ $sql1 = "SELECT boss_id_boss_factory FROM factory_boss
                                 </div>
                                 <div id="factoryEdit" style="display: none;">
                                     <label for="editFactoryName">Factory Name:</label>
-                                    <label for="editEmployeeCount">Number of Employees:</label>
+                                    <label for="editedEmployeeCount">Number of Employees:</label>
                                     <input type="text" id="editEmployeeCount" value="<?php echo $row['employee_count']; ?>"><br>
                                 </div>
                                 <div id="map" style="height: 300px;"></div>
