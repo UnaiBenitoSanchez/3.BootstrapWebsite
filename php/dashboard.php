@@ -157,10 +157,13 @@ session_start();
 
             $stmt = $conn->prepare($addEventSQL);
             $stmt->execute();
+            $conn = null;
         } catch (PDOException $e) {
             echo "Error inserting data: " . $e->getMessage();
         }
+        exit();
     }
+    $conn = null;
     ?>
 
     <script>
