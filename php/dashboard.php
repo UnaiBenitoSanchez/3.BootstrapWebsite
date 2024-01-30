@@ -120,7 +120,7 @@ session_start();
 
             $subtractEventSQL = "
                 CREATE EVENT IF NOT EXISTS subtract_quantity_event_$productName
-                ON SCHEDULE EVERY 20 SECOND
+                ON SCHEDULE EVERY 1 HOUR
                 DO
                 BEGIN
 
@@ -139,7 +139,7 @@ session_start();
 
             $addEventSQL = "
                 CREATE EVENT IF NOT EXISTS add_quantity_event_$productName
-                ON SCHEDULE EVERY 20 SECOND
+                ON SCHEDULE EVERY 1 HOUR
                 DO
                 BEGIN
            

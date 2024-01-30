@@ -247,7 +247,7 @@ INSERT INTO inventory VALUES('26','3000','2024-01-03','26','4');
 -- Event to delete from Barbie Signature Look Gold Disco - Barbie The Movie
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_Barbie_Signature_Look
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
 
@@ -266,7 +266,7 @@ DELIMITER ;
 -- Event to add to Barbie Signature Look Gold Disco - Barbie The Movie
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_Barbie_Signature_Look
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Signature Look Gold Disco - Barbie The Movie'));
@@ -284,7 +284,7 @@ DELIMITER ;
 -- Event to delete from Barbie The Movie Fashion Pack
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_Barbie_The_Movie_Fashion_Pack
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie The Movie Fashion Pack'));
@@ -302,7 +302,7 @@ DELIMITER ;
 -- Event to add to Barbie The Movie Fashion Pack
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_Barbie_The_Movie_Fashion_Pack
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie The Movie Fashion Pack'));
@@ -320,7 +320,7 @@ DELIMITER ;
 -- Event to delete from Barbie Signature Ken Perfect Day - Barbie The Movie
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_Barbie_Signature_Ken
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Signature Ken Perfect Day - Barbie The Movie'));
@@ -338,7 +338,7 @@ DELIMITER ;
 -- Event to add to Barbie Signature Ken Perfect Day - Barbie The Movie
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_Barbie_Signature_Ken
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Signature Ken Perfect Day - Barbie The Movie'));
@@ -356,7 +356,7 @@ DELIMITER ;
 -- Event to delete from Barbie Cutie Reveal Serie Phantasy Unicorn 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_unicorn 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Phantasy Unicorn'));
@@ -374,7 +374,7 @@ DELIMITER ;
 -- Event to add to Barbie Cutie Reveal Serie Phantasy Unicorn 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_unicorn
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Phantasy Unicorn'));
@@ -392,7 +392,7 @@ DELIMITER ;
 -- Event to delete from Barbie Cutie Reveal Serie Jungle Friends Tiger 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_tiger 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Jungle Friends Tiger'));
@@ -410,7 +410,7 @@ DELIMITER ;
 -- Event to add to CatNap 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_tiger
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Barbie Cutie Reveal Serie Jungle Friends Tiger'));
@@ -428,7 +428,7 @@ DELIMITER ;
 -- Event to delete from Disney Frozen Queen Anna & Elsa Snow Queen 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_elsaAna
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Frozen Queen Anna & Elsa Snow Queen'));
@@ -446,7 +446,7 @@ DELIMITER ;
 -- Event to add to Disney Frozen Queen Anna & Elsa Snow Queen 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_elsaAna 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Frozen Queen Anna & Elsa Snow Queen'));
@@ -465,7 +465,7 @@ DELIMITER ;
 -- Event to delete from Millennium Falcon
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_Millennium_Falcon
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
 
@@ -484,7 +484,7 @@ DELIMITER ;
 -- Event to add to Millennium Falcon
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_Millennium_Falcon
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Millennium Falcon'));
@@ -502,7 +502,7 @@ DELIMITER ;
 -- Event to delete from Orient Express Train
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_Orient_Express_Train
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Orient Express Train'));
@@ -520,7 +520,7 @@ DELIMITER ;
 -- Event to add to Orient Express Train
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_Orient_Express_Train
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Orient Express Train'));
@@ -538,7 +538,7 @@ DELIMITER ;
 -- Event to delete from Avengers Tower
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_Avengers_Tower
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Avengers Tower'));
@@ -556,7 +556,7 @@ DELIMITER ;
 -- Event to add to Avengers Tower
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_Avengers_Tower
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Avengers Tower'));
@@ -574,7 +574,7 @@ DELIMITER ;
 -- Event to delete from Cherry Blossoms 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_cherry
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Cherry Blossoms'));
@@ -592,7 +592,7 @@ DELIMITER ;
 -- Event to add to Cherry Blossoms 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_cherry 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Cherry Blossoms'));
@@ -610,7 +610,7 @@ DELIMITER ;
 -- Event to delete from Disney Ariel Mini Castle 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_ariel 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Ariel Mini Castle'));
@@ -628,7 +628,7 @@ DELIMITER ;
 -- Event to add to Disney Ariel Mini Castle 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_ariel 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Disney Ariel Mini Castle'));
@@ -646,7 +646,7 @@ DELIMITER ;
 -- Event to delete from Natural History Museum 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_museum
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Natural History Museum'));
@@ -664,7 +664,7 @@ DELIMITER ;
 -- Event to add to Natural History Museum 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_museum 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Natural History Museum'));
@@ -683,7 +683,7 @@ DELIMITER ;
 -- Event to delete from SMG-Zesty de Nerf Fortnite
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_SMG_Zesty_de_Nerf_Fortnite
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
 
@@ -702,7 +702,7 @@ DELIMITER ;
 -- Event to add to SMG-Zesty de Nerf Fortnite
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_SMG_Zesty_de_Nerf_Fortnite
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'SMG-Zesty de Nerf Fortnite'));
@@ -720,7 +720,7 @@ DELIMITER ;
 -- Event to delete from Nerf Ultra Select
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_Nerf_Ultra_Select
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Ultra Select'));
@@ -738,7 +738,7 @@ DELIMITER ;
 -- Event to add to Nerf Ultra Select
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_Nerf_Ultra_Select
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Ultra Select'));
@@ -756,7 +756,7 @@ DELIMITER ;
 -- Event to delete from Nerf DinoSquad Stegosmash
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_Nerf_DinoSquad_Stegosmash
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf DinoSquad Stegosmash'));
@@ -774,7 +774,7 @@ DELIMITER ;
 -- Event to add to Nerf DinoSquad Stegosmash
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_Nerf_DinoSquad_Stegosmash
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf DinoSquad Stegosmash'));
@@ -792,7 +792,7 @@ DELIMITER ;
 -- Event to delete from Nerf DinoSquad Rex-Rampage 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_rex 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf DinoSquad Rex-Rampage'));
@@ -810,7 +810,7 @@ DELIMITER ;
 -- Event to add to Nerf DinoSquad Rex-Rampage 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_rex 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf DinoSquad Rex-Rampage'));
@@ -828,7 +828,7 @@ DELIMITER ;
 -- Event to delete from Nerf Alpha Strike Slinger SD-1 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_slinger
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike Slinger SD-1'));
@@ -846,7 +846,7 @@ DELIMITER ;
 -- Event to add to Nerf Alpha Strike Slinger SD-1 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_slinger 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike Slinger SD-1'));
@@ -864,7 +864,7 @@ DELIMITER ;
 -- Event to delete from Nerf Alpha Strike - Mission Set 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_mission
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike - Mission Set'));
@@ -882,7 +882,7 @@ DELIMITER ;
 -- Event to add to Nerf Alpha Strike - Mission Set 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_mission
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Nerf Alpha Strike - Mission Set'));
@@ -901,7 +901,7 @@ DELIMITER ;
 -- Event to delete from Bobby BearHug
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_bobbybearhug
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bobby BearHug'));
@@ -919,7 +919,7 @@ DELIMITER ;
 -- Event to add to Bobby BearHug
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_bobbybearhug
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bobby BearHug'));
@@ -937,7 +937,7 @@ DELIMITER ;
 -- Event to delete from Bubba Bubbaphant
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
 
@@ -956,7 +956,7 @@ DELIMITER ;
 -- Event to add to Bubba Bubbaphant
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Bubba Bubbaphant'));
@@ -974,7 +974,7 @@ DELIMITER ;
 -- Event to delete from CraftyCorn
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_CraftyCorn
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CraftyCorn'));
@@ -992,7 +992,7 @@ DELIMITER ;
 -- Event to add to CraftyCorn
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_CraftyCorn
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CraftyCorn'));
@@ -1010,7 +1010,7 @@ DELIMITER ;
 -- Event to delete from DogDay
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_DogDay
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'DogDay'));
@@ -1028,7 +1028,7 @@ DELIMITER ;
 -- Event to add to DogDay
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_DogDay
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'DogDay'));
@@ -1046,7 +1046,7 @@ DELIMITER ;
 -- Event to delete from Hoppy Hopscotch
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_Hoppy_Hopscotch
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Hoppy Hopscotch'));
@@ -1064,7 +1064,7 @@ DELIMITER ;
 -- Event to add to Hoppy Hopscotch
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_Hoppy_Hopscotch
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'Hoppy Hopscotch'));
@@ -1082,7 +1082,7 @@ DELIMITER ;
 -- Event to delete from KickinChicken
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_KickinChicken
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'KickinChicken'));
@@ -1100,7 +1100,7 @@ DELIMITER ;
 -- Event to add to KickinChicken
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_KickinChicken
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'KickinChicken'));
@@ -1118,7 +1118,7 @@ DELIMITER ;
 -- Event to delete from PickyPiggy 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_PickyPiggy 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'PickyPiggy'));
@@ -1136,7 +1136,7 @@ DELIMITER ;
 -- Event to add to PickyPiggy 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_PickyPiggy 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'PickyPiggy'));
@@ -1154,7 +1154,7 @@ DELIMITER ;
 -- Event to delete from CatNap 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS subtract_quantity_event_CatNap 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CatNap'));
@@ -1172,7 +1172,7 @@ DELIMITER ;
 -- Event to add to CatNap 
 DELIMITER //
 CREATE EVENT IF NOT EXISTS add_quantity_event_CatNap 
-ON SCHEDULE EVERY 20 SECOND
+ON SCHEDULE EVERY 1 HOUR
 DO
 BEGIN
   SET @current_quantity := (SELECT available_quantity FROM BootstrapWebsite.inventory WHERE product_id_product = (SELECT id_product FROM BootstrapWebsite.product WHERE name = 'CatNap'));
